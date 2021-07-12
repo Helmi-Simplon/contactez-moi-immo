@@ -10,7 +10,7 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active"
-                            href="#">Accueil <span
+                            href="{{ path('home') }}">Accueil <span
                                 class="visually-hidden">(current)</span>
                         </a>
                     </li>
@@ -25,10 +25,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="#">Connexion</a>
+                            href="{{ path('app_login') }}">Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Enregistrement</a>
+                        <a class="nav-link" href="{{ path('app_register') }}">Enregistrement</a>
                     </li>
                 </ul>
             </div>
