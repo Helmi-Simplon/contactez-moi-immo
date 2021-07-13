@@ -1,9 +1,10 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 
-{% block title %}Réinitialisez votre mot de passe{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Réinitialisez votre mot de passe</h1>
+    <legend class="my-5">Réinitialisez votre mot de passe</legend>
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
