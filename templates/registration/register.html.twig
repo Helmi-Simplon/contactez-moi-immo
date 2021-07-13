@@ -8,6 +8,13 @@
     
     <div class="my-5">
     {{ form_start(registrationForm) }}
+    <div class="text-center">
+        {{ form_row(registrationForm.roles, {
+
+        label: 'Vous êtes :'
+        
+        }) }}
+    </div>
         {{ form_row(registrationForm.email, {
         label: 'Courriel'
         }) }}

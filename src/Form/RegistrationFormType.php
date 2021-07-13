@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,11 +18,33 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $roles = $this->getParent('security.role_hierarchy.roles');
         $builder
+
+            ->add('roles', ChoiceType::class,array(
+                'attr'  =>  array('class' => 'container-fluid',
+                'style' => 'border:none;width:fit-content;background-color:transparent;',),
+                'choices'   => array
+                (
+                
+                'Choix de votre rôle :' => array
+                (
+                    'Acheteur' => 'ROLE_ACHETEUR',
+                    'Vendeur' => 'ROLE_VENDEUR'
+                ),
+                
+                ) ,
+                'required' => true,
+                'expanded' =>true,
+                'multiple'  => true,
+            )
+        
+            )
             ->add('email')
             ->add('prenom')
             ->add('nom')
             ->add('numero_telephone')
+            
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
