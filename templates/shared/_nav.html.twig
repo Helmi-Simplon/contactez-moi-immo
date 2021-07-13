@@ -23,16 +23,17 @@
 				</li>
 				{% if not app.user %}
 					<li class="nav-item">
-						<a class="nav-link" href={{ path('app_login') }}>Connexion</a>
+						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href={{ path('app_register') }}>Enregistrement</a>
+						<a class="nav-link" href="{{ path('app_register') }}">Enregistrement</a>
 					</li>
 				{% else %}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('home') }}">Mon Espace</a>
 					</li>
-					<a class="nav-link" href={{ path('app_logout') }}>Déconnexion</a>
+					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </i>
 				{% endif %}
 			</ul>
 		</div>
