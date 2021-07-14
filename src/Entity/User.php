@@ -59,9 +59,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $demande;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Offres::class, mappedBy="vendeur", orphanRemoval=true)
+     */
+    private $offre;
+
     public function __construct()
     {
         $this->demande = new ArrayCollection();
+        $this->offre = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +219,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($demande->getAcheteur() === $this) {
                 $demande->setAcheteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offres[]
+     */
+    public function getOffre(): Collection
+    {
+        return $this->offre;
+    }
+
+    public function addOffre(Offres $offre): self
+    {
+        if (!$this->offre->contains($offre)) {
+            $this->offre[] = $offre;
+            $offre->setVendeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offres $offre): self
+    {
+        if ($this->offre->removeElement($offre)) {
+            // set the owning side to null (unless already changed)
+            if ($offre->getVendeur() === $this) {
+                $offre->setVendeur(null);
             }
         }
 
