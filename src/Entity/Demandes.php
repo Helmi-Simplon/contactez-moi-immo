@@ -6,6 +6,7 @@ use App\Repository\DemandesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=DemandesRepository::class)
@@ -65,11 +66,13 @@ class Demandes
     private $description;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $date_demande;
 
     /**
+     * @gedmo\Slug(fields={"titre"})
      * @ORM\Column(type="string", length=120)
      */
     private $slug;
@@ -214,24 +217,24 @@ class Demandes
         return $this->date_demande;
     }
 
-    public function setDateDemande(\DateTimeInterface $date_demande): self
-    {
-        $this->date_demande = $date_demande;
+    // public function setDateDemande(\DateTimeInterface $date_demande): self
+    // {
+    //     $this->date_demande = $date_demande;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
+    // public function setSlug(string $slug): self
+    // {
+    //     $this->slug = $slug;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getTypeBien(): ?TypeBien
     {
