@@ -14,7 +14,7 @@ class DemandesController extends AbstractController
     public function index(): Response
     {
         return $this->render('demandes/index.html.twig', [
-            'controller_name' => 'DemandesController',
+            'controller_name' => 'Demandes',
         ]);
     }
 }

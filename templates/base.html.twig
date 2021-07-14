@@ -16,12 +16,18 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
+    
     <body>
 
         
 		{% include 'shared/_nav.html.twig' %}
         {% include 'shared/_header.html.twig' %}
-
+        <h1 style="color:#fff;padding-top:100px;text-align:center">{% block titre %}{% endblock %}</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
         {% block body %}{% endblock %}
 
         {% include 'shared/_footer.html.twig' %}
