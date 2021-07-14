@@ -64,10 +64,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $offre;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="utilisateur")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->demande = new ArrayCollection();
         $this->offre = new ArrayCollection();
+        $this->image = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +255,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($offre->getVendeur() === $this) {
                 $offre->setVendeur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImage(): Collection
+    {
+        return $this->image;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->image->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getUtilisateur() === $this) {
+                $image->setUtilisateur(null);
             }
         }
 
