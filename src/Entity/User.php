@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -51,6 +53,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=50)
      */
     private $numero_telephone;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="acheteur", orphanRemoval=true)
+     */
+    private $demande;
+
+    public function __construct()
+    {
+        $this->demande = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,6 +185,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNumeroTelephone(string $numero_telephone): self
     {
         $this->numero_telephone = $numero_telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Demandes[]
+     */
+    public function getDemande(): Collection
+    {
+        return $this->demande;
+    }
+
+    public function addDemande(Demandes $demande): self
+    {
+        if (!$this->demande->contains($demande)) {
+            $this->demande[] = $demande;
+            $demande->setAcheteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demandes $demande): self
+    {
+        if ($this->demande->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getAcheteur() === $this) {
+                $demande->setAcheteur(null);
+            }
+        }
 
         return $this;
     }

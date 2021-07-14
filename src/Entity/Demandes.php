@@ -85,6 +85,12 @@ class Demandes
      */
     private $adresse;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="demande")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $acheteur;
+
     public function __construct()
     {
         $this->adresse = new ArrayCollection();
@@ -259,6 +265,18 @@ class Demandes
     public function removeAdresse(Adresse $adresse): self
     {
         $this->adresse->removeElement($adresse);
+
+        return $this;
+    }
+
+    public function getAcheteur(): ?User
+    {
+        return $this->acheteur;
+    }
+
+    public function setAcheteur(?User $acheteur): self
+    {
+        $this->acheteur = $acheteur;
 
         return $this;
     }
