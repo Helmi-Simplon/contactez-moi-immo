@@ -83,10 +83,10 @@ class Demandes
      */
     private $type_bien;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Adresse::class)
-     */
-    private $adresse;
+    // /**
+    //  * @ORM\ManyToMany(targetEntity=Adresse::class)
+    //  */
+    // private $adresse;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="demande")
@@ -94,9 +94,15 @@ class Demandes
      */
     private $acheteur;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Adresse::class, inversedBy="demandes")
+     */
+    private $adresses;
+
     public function __construct()
     {
         $this->adresse = new ArrayCollection();
+        $this->adresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,29 +254,29 @@ class Demandes
         return $this;
     }
 
-    /**
-     * @return Collection|Adresse[]
-     */
-    public function getAdresse(): Collection
-    {
-        return $this->adresse;
-    }
+    // /**
+    //  * @return Collection|Adresse[]
+    //  */
+    // public function getAdresse(): Collection
+    // {
+    //     return $this->adresse;
+    // }
 
-    public function addAdresse(Adresse $adresse): self
-    {
-        if (!$this->adresse->contains($adresse)) {
-            $this->adresse[] = $adresse;
-        }
+    // public function addAdresse(Adresse $adresse): self
+    // {
+    //     if (!$this->adresse->contains($adresse)) {
+    //         $this->adresse[] = $adresse;
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeAdresse(Adresse $adresse): self
-    {
-        $this->adresse->removeElement($adresse);
+    // public function removeAdresse(Adresse $adresse): self
+    // {
+    //     $this->adresse->removeElement($adresse);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getAcheteur(): ?User
     {
@@ -280,6 +286,30 @@ class Demandes
     public function setAcheteur(?User $acheteur): self
     {
         $this->acheteur = $acheteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adresse[]
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): self
+    {
+        $this->adresses->removeElement($adress);
 
         return $this;
     }

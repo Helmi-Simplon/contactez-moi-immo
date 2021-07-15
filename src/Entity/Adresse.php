@@ -34,9 +34,15 @@ class Adresse
      */
     private $offre;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Demandes::class, mappedBy="adresses")
+     */
+    private $demandes;
+
     public function __construct()
     {
         $this->offre = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,6 +99,33 @@ class Adresse
             if ($offre->getAdresse() === $this) {
                 $offre->setAdresse(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Demandes[]
+     */
+    public function getDemandes(): Collection
+    {
+        return $this->demandes;
+    }
+
+    public function addDemande(Demandes $demande): self
+    {
+        if (!$this->demandes->contains($demande)) {
+            $this->demandes[] = $demande;
+            $demande->addAdress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demandes $demande): self
+    {
+        if ($this->demandes->removeElement($demande)) {
+            $demande->removeAdress($this);
         }
 
         return $this;

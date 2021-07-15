@@ -19,22 +19,22 @@ class DemandesRepository extends ServiceEntityRepository
         parent::__construct($registry, Demandes::class);
     }
 
-    // /**
-    //  * @return Demandes[] Returns an array of Demandes objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Demandes[] Returns an array of Demandes objects
+     */
+
+    public function findAllWithAdresses()
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
+            ->addselect('a','u','i')
+            ->leftjoin('d.adresses','a')
+            ->leftjoin('d.acheteur','u')
+            ->leftjoin('u.image','i')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Demandes

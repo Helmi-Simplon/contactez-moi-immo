@@ -4,7 +4,6 @@
 {% endblock %}
 {% block stylesheets %}
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Roboto &display=swap');
 
 		body {
 			background-image: url('{{asset("assets/images/demande1.jpg")}}');
@@ -12,6 +11,7 @@
 		.card {
 			background-image: url('{{asset("assets/images/card.jpg")}}');
 			width: 350px;
+            height:auto;
 			border-radius: 50px;
             color:white;
 		
@@ -46,28 +46,36 @@
 	<main>
 
 		<div class="row">
-			{% for i in 0..11 %}
+        
+			{% for demande in demandes %}
+            
 				<div class="col-md-3 col-lg-3 col-xl-4 col-sm-12 mt-5">
 					<div class="card p-4">
 						<div class="first">
-							<h6 class="heading">Appartement 2 pèces</h6>
+							<h6 class="heading">{{ demande.titre }}</h6>
 							<div class="time d-flex flex-row align-items-center justify-content-between mt-3">
 								<div class="d-flex align-items-center">
-									<i class="fa fa-clock-o clock"></i>
-									<span class="hour ml-1">publié il y a 3min</span>
+									<span class="hour ml-1">{{ demande.dateDemande | ago }}</span>
 								</div>
 								<div>
-									<span class="font-weight-bold">200.000 €</span>
+									<span class="font-weight-bold">{{ demande.budget }} €</span>
 								</div>
 							</div>
 						</div>
 						<div class="second d-flex flex-row mt-2">
+                       
 							<div class="image mr-3">
-								<img src="{{asset('assets/images/laracroft.png')}}" class="rounded-circle" width="60"/>
+                            
+						{% for acheteurs in demande.acheteur.image %}
+                        <img  src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="60" />
+                          {% endfor %}
+                            
+                            
 							</div>
+                        
 							<div class="">
 								<div class="d-flex flex-row mb-1">
-									<span>Lara Croft</span>
+									<span>{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}</span>
 								</div>
 								<div class="ml-5">
 									<button class="btn btn-outline-dark btn-sm">Voir plus..</button>
@@ -76,15 +84,15 @@
 						</div>
 						<hr class="line-color">
 						<p class="text-left">Zone de recherche :
-							Paris 75005</p>
+						<ol>	{% for adresse in demande.adresses %} <li> {{ adresse.ville }} {{ adresse.codePostal }} </li> {% endfor %} </ol></p>
 						<div class="third mt-4">
 							<button class="btn btn-dark btn-block">
-								<i class="fa fa-clock-o"></i>
 								Voir Profil</button>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
+            
 		</div>
 
 	</main>
