@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CONTACTEZ-MOI IMMO DEMANDES
+{% endblock %}
+{% block stylesheets %}
+	<style>
+
+		body {
+			background-image: url('{{asset("assets/images/demande1.jpg")}}');
+		}
+		.card {
+			background-image: url('{{asset("assets/images/card.jpg")}}');
+			width: 350px;
+            height:auto;
+			border-radius: 50px;
+            color:white;
+		
+		}
+
+		.heading {
+			font-weight: 900;
+            color:white;
+
+		}
+
+		.hour {
+			margin-top: 1px;
+			color: white;
+			font-size: 12px
+		}
+
+		.btn {
+			border-radius: 70px;
+            color:white;
+            border-color:white;
+		}
+
+		.line-color {
+			color: green;
+			height: 3px;
+		}
+	</style>
+{% endblock %}
+{% block titre %} ...vous êtes acheteur? Tardez pas à déposer votre demande..<br> Let's go!{% endblock %}
+{% block body %}
+	<main>
+
+		<div class="container">
+        
+			{{ form(form) }}
+			
+		</div>
+
+	</main>
+{% endblock %}

@@ -6,6 +6,7 @@ use App\Repository\TypeBienRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TypeBienRepository::class)
@@ -25,18 +26,27 @@ class TypeBien
     private $type;
 
     /**
+     * @gedmo\Slug(fields={"type"})
      * @ORM\Column(type="string", length=120)
      */
     private $slug;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Offres::class, mappedBy="type_bien")
      */
     private $offre;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="type_bien", orphanRemoval=true)
+     */
+    private $demande;
+
     public function __construct()
     {
         $this->offre = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
+        $this->demande = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,12 +71,12 @@ class TypeBien
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
+    // public function setSlug(string $slug): self
+    // {
+    //     $this->slug = $slug;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|Offres[]
@@ -97,4 +107,41 @@ class TypeBien
 
         return $this;
     }
+
+    /**
+     * @return Collection|Demandes[]
+     */
+    public function getDemande(): Collection
+    {
+        return $this->demande;
+    }
+
+    public function addDemande(Demandes $demande): self
+    {
+        if (!$this->demande->contains($demande)) {
+            $this->demande[] = $demande;
+            $demande->setTypeBien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demandes $demande): self
+    {
+        if ($this->demande->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getTypeBien() === $this) {
+                $demande->setTypeBien(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        
+        return $this->type;
+    }
+    
 }
