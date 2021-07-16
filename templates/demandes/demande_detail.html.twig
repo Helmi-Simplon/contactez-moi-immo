@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CONTACTEZ-MOI IMMO DEMANDES
+{% endblock %}
+{% block stylesheets %}
+	<style>
+
+		body {
+			background-image: url('{{asset("assets/images/demande1.jpg")}}');
+		}
+		.card {
+			background-image: url('{{asset("assets/images/textile.jpg")}}');
+			width: 800px;
+			height: fit-content;
+			color: white;
+			text-align:center;
+			padding-bottom:50px;
+
+		}
+
+		.heading {
+			font-weight: 900;
+			color: white;
+
+		}
+
+		.hour {
+			margin-top: 1px;
+			color: white;
+			font-size: 12px;
+			text-align: left;
+		}
+
+		.btn {
+			border-radius: 70px;
+			color: white;
+			border-color: white;
+		}
+
+		.line-color {
+			color: green;
+			height: 3px;
+		}
+	</style>
+{% endblock %}
+{% block titre %}
+	...et voici les détails...<br>
+	Let's read!
+{% endblock %}
+{% block body %}
+	<main>
+
+		<div class="row">
+			<div class="col-3 ">
+				{% for acheteurs in demande.acheteur.image %}
+					<img src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200"/>
+				{% endfor %}
+			</div>
+			<div class="card col-4 mt-5">
+			<span class="hour ml-1"> diffusé{{ demande.dateDemande | ago }}</span>
+				Budget :
+				<div>
+					<legend>{{ demande.budget}}€</legend>
+					<div>
+						Type de Bien :
+						<div><legend>{{ demande.typeBien }}</legend><div>
+								Nombre de Pièce :
+								<div><legend>{{ demande.nbrePieces }}</legend><div>
+										Zone de recherche :
+										<div>
+											<legend>{% for adresse in demande.adresses %}</legend>
+												{{ adresse.ville }}
+											{% endfor %}
+										</div>
+										<hr>
+											Description :
+											<legend>{{ demande.description}}</legend>
+											</div>
+											</div>
+
+										</main>
+									{% endblock %}

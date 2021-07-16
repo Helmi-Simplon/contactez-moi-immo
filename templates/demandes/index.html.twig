@@ -33,6 +33,7 @@
 			border-radius: 70px;
             color:white;
             border-color:white;
+            margin-left:10px;
 		}
 
 		.line-color {
@@ -84,7 +85,8 @@
 									<span>{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}</span>
 								</div>
 								<div class="ml-5">
-									<button class="btn btn-outline-dark btn-sm">Voir plus..</button>
+                                
+									<a class="btn btn-outline-dark btn-sm" href="{{ path('demande_detail', {slug: demande.slug}) }}">>>Voir plus</a>
 								</div>
 							</div>
 						</div>
