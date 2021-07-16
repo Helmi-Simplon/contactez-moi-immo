@@ -39,12 +39,18 @@
 			color: green;
 			height: 3px;
 		}
+        legend{
+            color: gray;
+        }
 	</style>
 {% endblock %}
 {% block titre %} ...vous avez un bien immobilier à vendre? et qui répond à mes attentes?<br> contactez-moi asap!{% endblock %}
 {% block body %}
 	<main>
-
+    <div class='container text-center'>
+<legend>Vous êtes un acheteur? Déposez votre demande en cliquant sur le bouton ci-dessous :</legend>
+<a type="button" class="btn btn-dark" href="{{path('demande_add')}}">Postez votre demande</a>
+</div>
 		<div class="row">
         
 			{% for demande in demandes %}
