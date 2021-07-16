@@ -1,11 +1,11 @@
-<header {% if app.request.requestUri is same as "/" %} style="height:400px;background-repeat: no-repeat; background-image: url('assets/images/money.jpg');background-size:100% 100%;" 
+<header {% if app.request.requestUri is same as "/" %} style="height:450px;background-repeat: no-repeat; background-image: url('assets/images/money.jpg');background-size:100% 100%;" 
 {% elseif app.request.requestUri is same as "/register" %} style="height:350px;background-repeat: no-repeat; background-image: url('assets/images/enregistrement.jpg');background-size:100% 100%;"
 {% elseif app.request.requestUri is same as "/login" %} style="height:350px;background-repeat: no-repeat; background-image: url('assets/images/connexion.jpg');background-size:100% 100%;"
 
 {% endif %}>
-	<div class="container position-relative px-4 px-lg-5">
+	<div class="container position-relative text-center px-4 px-lg-5">
     {% if app.user %}
-    <div class="container-fluid" style="color:#fff;padding-top:50px;text-align:center">
+    <div class="container-fluid" style="color:#fff;padding-top:2%;">
     {% for image in app.user.image %}
     <img  src="{{ asset('assets/images/' ~ image.urlImage ) }}" class="rounded-circle" width="60" />
    {% endfor %}

@@ -10,7 +10,7 @@
 		}
 		.card {
 			background-image: url('{{asset("assets/images/textile.jpg")}}');
-			width: 800px;
+			width: 70%;
 			height: fit-content;
 			color: white;
 			text-align:center;
@@ -41,22 +41,36 @@
 			color: green;
 			height: 3px;
 		}
+		.info-name{
+			text-align:center;
+			width:60%;
+			font-size:90%;
+			font-weight:bolder;
+			color:gray;
+			margin-left:1%;
+			font-family:comic;
+		}
+		.info{
+			margin-left:20%;
+			color:white;
+		}
 	</style>
 {% endblock %}
 {% block titre %}
-	...et voici les détails...<br>
-	Let's read!
+	<div class="info">et voici les détails...<br></div>
+	<div class="info">Let's read it! </div>
 {% endblock %}
 {% block body %}
 	<main>
 
-		<div class="row">
-			<div class="col-3 ">
+		<div class="d-flex">
+			<div class="col-2">
 				{% for acheteurs in demande.acheteur.image %}
-					<img src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200"/>
+					<img src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="60%"/>
 				{% endfor %}
+				<div class="info-name">{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}</div>
 			</div>
-			<div class="card col-4 mt-5">
+			<div class="card col-2 mt-5">
 			<span class="hour ml-1"> diffusé{{ demande.dateDemande | ago }}</span>
 				Budget :
 				<div>
