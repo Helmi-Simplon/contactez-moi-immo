@@ -47,4 +47,16 @@ class OffresRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllWithAdressesAndImages()
+    {
+        return $this->createQueryBuilder('o')
+            ->addselect('a','u','i')
+            ->leftjoin('o.adresses','a')
+            ->leftjoin('o.vendeur','u')
+            ->leftjoin('u.image','i')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
