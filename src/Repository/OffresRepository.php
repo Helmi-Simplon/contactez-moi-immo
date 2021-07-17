@@ -52,7 +52,7 @@ class OffresRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('o')
             ->addselect('a','u','i')
-            ->leftjoin('o.adresses','a')
+            ->leftjoin('o.adresse','a')
             ->leftjoin('o.vendeur','u')
             ->leftjoin('u.image','i')
             ->getQuery()
