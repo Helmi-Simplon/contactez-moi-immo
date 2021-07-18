@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CONTACTEZ-MOI IMMO OFFRES
+{% endblock %}
+{% block stylesheets %}
+	<style>
+
+		body {
+			background-image: url('{{asset("assets/images/city.jpg")}}');
+            background-size:cover;
+		}
+		
+        main{
+            color:white;
+            font-weight: bolder;
+            text-shadow:1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+        }
+
+		.btn {
+			border-radius: 70px;
+            color:white;
+            border-color:white;
+            text-shadow:1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+		}
+
+	</style>
+{% endblock %}
+{% block titre %}<div class="add-offer"> ...vous êtes vendeur? Ne tardez pas à déposer votre offre..<br> Let's go!</div>{% endblock %}
+{% block body %}
+	<main class="add-offer">
+
+		<div class="container">
+        <div class="wraper">
+			{{ form(form) }}
+			
+		</div>
+        </div>
+
+	</main>
+{% endblock %}

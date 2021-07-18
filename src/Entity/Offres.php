@@ -80,6 +80,7 @@ class Offres
     private $prix;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $date_offre;

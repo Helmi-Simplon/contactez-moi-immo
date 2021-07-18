@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Offres;
+use App\Form\OffresType;
 use App\Repository\OffresRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
