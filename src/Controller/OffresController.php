@@ -18,7 +18,7 @@ class OffresController extends AbstractController
     public function index(OffresRepository $offresRepository): Response
     {
         $offres = $offresRepository -> findAllWithAdressesAndImages();
-        dd($offres);
+        //dd($offres);
         return $this->render('offres/index.html.twig', [
             'controller_name' => 'OffresController',
             'offres' => $offres,

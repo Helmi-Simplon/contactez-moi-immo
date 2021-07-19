@@ -7,26 +7,7 @@
 
 		body {
 			background-image: url('{{asset("assets/images/demande1.jpg")}}');
-		}
-		.card {
-			background-image: url('{{asset("assets/images/card.jpg")}}');
-			width: 350px;
-            height:auto;
-			border-radius: 50px;
-            color:white;
-		
-		}
-
-		.heading {
-			font-weight: 900;
-            color:white;
-
-		}
-
-		.hour {
-			margin-top: 1px;
-			color: white;
-			font-size: 12px
+			background-size: cover;
 		}
 
 		.btn {
@@ -35,13 +16,13 @@
             border-color:white;
 		}
 
-		.line-color {
-			color: green;
-			height: 3px;
-		}
+		.add-offer{
+            color:white;
+            text-shadow:1px 1px 2px black, 0 0 1em gray, 0 0 0.2em white;
+        }
 	</style>
 {% endblock %}
-{% block titre %} ...vous êtes acheteur? Tardez pas à déposer votre demande..<br> Let's go!{% endblock %}
+{% block titre %}<div class="add-offer"> ...vous êtes acheteur? Tardez pas à déposer votre demande..<br> Let's go!</div>{% endblock %}
 {% block body %}
 	<main>
 

@@ -1,20 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OffresController!{% endblock %}
+{% block title %}CONTACTEZ MOI IMMO OFFRES
+{% endblock %}
+{% block stylesheets %}
+	<style>
 
+		body {
+			background-image: url('{{asset("assets/images/exterior.jpg")}}');
+            background-size:cover;
+		}
+		.card {
+			background-image: url('{{asset("assets/images/textile.jpg")}}');
+            margin-left:10%;
+			width: 350px;
+			height: auto;
+			color: white;
+            border-radius: 50px;
+
+		}
+
+		.heading {
+			font-weight: 900;
+			color: white;
+
+		}
+
+		.hour {
+			margin-top: 1px;
+			color: white;
+			font-size: 12px
+		}
+
+		.btn {
+			border-radius: 70px;
+			color: white;
+			border-color: white;
+			margin-left: 10px;
+		}
+
+		.line-color {
+			color: green;
+			height: 3px;
+		}
+		legend {
+			color: white;
+            text-shadow:1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
+		}
+	</style>
+{% endblock %}
+{% block titre %}
+	<span style="text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;">...vous cherchez un bien immobilier? et qui répond à vos attentes?<br>
+	vous êtes au bon endroit!</span>
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<main>
+	<div class='container text-center'>
+		<legend>Vous êtes un vendeur? Déposez votre offre en cliquant sur le bouton ci-dessous :</legend>
+		<a type="button" class="btn btn-dark" href="{{path('offre_add')}}">Postez votre offre</a>
+	</div>
+	<div class="row">
+		{% for offre in offres %}
+			<div class="col-md-3 col-lg-3 col-xl-3 col-sm-12 mt-5">
+					<div class="card p-4">
+						<div class="first">
+							<h6 class="heading">{{ offre.titre }}</h6>
+		<div class="time d-flex flex-row align-items-center justify-content-between mt-3">
+								<div class="d-flex align-items-center">
+									<span class="hour ml-1">{{ offre.dateOffre | ago }}</span>
+								</div>
+								<div>
+									<span class="font-weight-bold">{{ offre.prix }} €</span>
+								</div>
+							</div>
+						</div>
+						<div class="second d-flex flex-row mt-2">
+                       
+							<div class="image mr-3">
+                            
+						{% for image in offre.vendeur.image %}
+                        <img  src="{{ asset('assets/images/' ~ image.urlImage ) }}" class="" width="60" />
+                          {% endfor %}
+                            
+                            
+							</div>
+                        
+							<div class="">
+								<div class="d-flex flex-row mb-1">
+									<span>{{ offre.vendeur.prenom }} {{ offre.vendeur.nom }}</span>
+								</div>
+								<div class="ml-5">
+                                
+									<a class="btn btn-outline-dark btn-sm" href="">>>Voir plus</a>
+                                    {# {{ path('offre_detail', {slug: offre.slug}) }} #}
+								</div>
+							</div>
+						</div>
+						<hr class="line-color">
+						<p class="text-left">Zone de recherche :
+						<li> {{ offre.adresse.ville }} {{ offre.adresse.codePostal }} </li></p>
+						<div class="third mt-4">
+							<button class="btn btn-dark btn-block">
+								Voir Profil</button>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+            
+		</div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Utilisateur/Desktop/contactez-moi-immo/contactez-moi-immo/src/Controller/OffresController.php'|file_link(0) }}">src/Controller/OffresController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Utilisateur/Desktop/contactez-moi-immo/contactez-moi-immo/templates/offres/index.html.twig'|file_link(0) }}">templates/offres/index.html.twig</a></code></li>
-    </ul>
-</div>
+    </main>
 {% endblock %}

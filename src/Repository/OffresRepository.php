@@ -54,7 +54,7 @@ class OffresRepository extends ServiceEntityRepository
             ->addselect('a','u','i')
             ->leftjoin('o.adresse','a')
             ->leftjoin('o.vendeur','u')
-            ->leftjoin('u.image','i')
+            ->leftjoin('o.image','i')
             ->getQuery()
             ->getResult()
         ;
