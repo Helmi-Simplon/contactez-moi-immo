@@ -95,8 +95,16 @@
 									<span>{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}</span>
 								</div>
 								<div class="ml-5">
-                                
+                                {% if is_granted("ROLE_VENDEUR") %}
+                               
+                              
 									<a class="btn btn-outline-dark btn-sm" href="{{ path('demande_detail', {slug: demande.slug}) }}">>>Voir plus</a>
+
+                                {% else %}
+                               
+                              
+									<button class="btn btn-dark btn-sm" disabled>>>Voir plus</button>
+                                {% endif %}
 								</div>
 							</div>
 						</div>
