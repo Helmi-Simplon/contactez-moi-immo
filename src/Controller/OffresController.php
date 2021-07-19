@@ -26,6 +26,19 @@ class OffresController extends AbstractController
     }
 
     /**
+ * @Route("/acheteurs/offre/{slug}", name="offre_detail", methods={"GET"})
+ */
+public function detailOffre(Offres $offres): Response
+{
+
+    //dd($offres);
+return $this->render('offres/offre_detail.html.twig', [
+    'controller_name' => 'TestController',
+    'offres' => $offres,
+]);
+}
+
+    /**
      * @Route("/vendeurs/add", name="offre_add")
      */
     public function addOffres(Request $request): Response
