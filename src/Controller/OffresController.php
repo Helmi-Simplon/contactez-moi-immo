@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Offres;
 use App\Form\OffresType;
 use App\Repository\OffresRepository;
@@ -47,9 +48,27 @@ return $this->render('offres/offre_detail.html.twig', [
         $form = $this->createForm(OffresType::class, $offres);
 
         $form->handleRequest($request);
+        //dd($form);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $offres->setVendeur($this->getUser());
+            $images = $form->get('image')->getData();
+            foreach($images as $image){
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+                
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+                
+                // On crée l'image dans la base de données
+                $image = new Images();
+                $image->setUrlImage($fichier);
+                $offres->addImage($image);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($offres);
             $em->flush();

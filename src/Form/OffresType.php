@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Images;
 use App\Entity\Offres;
 use App\Entity\Adresse;
 use App\Entity\TypeBien;
@@ -10,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -39,9 +39,12 @@ class OffresType extends AbstractType
             ->add('adresse',EntityType::class, [
                 'class' => Adresse::class,
             ])
-            // ->add('image',EntityType::class, [
-            //     'class' => Images::class,
-            // ])
+            ->add('image',FileType::class, [
+                'label' => false,
+                'mapped' => false,
+                'multiple' => true,
+                'required' => false,
+            ])
             ->add('Valider', SubmitType::class)
         ;
     }
