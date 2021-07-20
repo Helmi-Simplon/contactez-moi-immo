@@ -89,12 +89,13 @@
 												
 										
 										</div>
-										<hr>Description :
+										
 										{% for image in offres.image %}
 										<div>	<img src="{{ asset('assets/images/offres/' ~ image.urlImage ) }}"  width="40%"/> </div>
 											{% endfor %}
-											
-											<legend>{{ offres.description}}</legend>
+											<hr>
+											<legend>Description :</legend>
+											{{ offres.description}}
 											</div>
 											</div>
 											

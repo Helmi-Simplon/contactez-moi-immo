@@ -97,7 +97,7 @@ class Offres
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="offre")
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="offre",cascade={"persist"})
      */
     private $image;
 
