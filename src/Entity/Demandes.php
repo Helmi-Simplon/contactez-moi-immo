@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\DemandesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\TypeBien;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DemandesRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=DemandesRepository::class)
@@ -77,16 +78,6 @@ class Demandes
      */
     private $slug;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=TypeBien::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type_bien;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Adresse::class)
-     */
-    private $adresse;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="demande")
@@ -95,13 +86,29 @@ class Demandes
     private $acheteur;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Adresse::class, inversedBy="demandes")
+     */
+    private $adresses;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeBien::class, inversedBy="demande")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type_bien;
+
+
+
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $actif;
 
     public function __construct()
     {
-        $this->adresse = new ArrayCollection();
+        
+        $this->adresses = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -241,41 +248,6 @@ class Demandes
     //     return $this;
     // }
 
-    public function getTypeBien(): ?TypeBien
-    {
-        return $this->type_bien;
-    }
-
-    public function setTypeBien(?TypeBien $type_bien): self
-    {
-        $this->type_bien_id = $type_bien;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Adresse[]
-     */
-    public function getAdresse(): Collection
-    {
-        return $this->adresse;
-    }
-
-    public function addAdresse(Adresse $adresse): self
-    {
-        if (!$this->adresse->contains($adresse)) {
-            $this->adresse[] = $adresse;
-        }
-
-        return $this;
-    }
-
-    public function removeAdresse(Adresse $adresse): self
-    {
-        $this->adresse->removeElement($adresse);
-
-        return $this;
-    }
 
     public function getAcheteur(): ?User
     {
@@ -285,6 +257,42 @@ class Demandes
     public function setAcheteur(?User $acheteur): self
     {
         $this->acheteur = $acheteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adresse[]
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): self
+    {
+        $this->adresses->removeElement($adress);
+
+        return $this;
+    }
+
+    public function getTypeBien(): ?TypeBien
+    {
+        return $this->type_bien;
+    }
+
+    public function setTypeBien(?TypeBien $type_bien): self
+    {
+        $this->type_bien = $type_bien;
 
         return $this;
     }

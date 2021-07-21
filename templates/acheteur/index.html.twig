@@ -1,0 +1,48 @@
+{% extends 'acheteur/base.html.twig' %}
+
+{% block title %}CONTACTEZ MOI IMMO ESPACE ACHETEUR
+{% endblock %}
+{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+
+{% block body %}
+
+		<main>
+			<div class="container">
+
+				<table class="table table-hover">
+					<legend>INFOS PROFIL</legend>
+					<hr>
+
+					<tbody>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>COURRIEL</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.email }}</td>
+						</tr>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>PRENOM</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.prenom }}</td>
+						</tr>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>NOM</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.nom }}</td>
+						</tr>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>TELEPHONE</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.numeroTelephone }}</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+		</main>
+	
+{% endblock %}

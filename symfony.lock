@@ -106,6 +106,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.1.0"
     },
+    "knplabs/knp-time-bundle": {
+        "version": "v1.16.1"
+    },
     "laminas/laminas-code": {
         "version": "4.4.2"
     },
@@ -635,6 +638,9 @@
         "version": "1.2.0"
     },
     "twig/extra-bundle": {
+        "version": "v3.3.1"
+    },
+    "twig/string-extra": {
         "version": "v3.3.1"
     },
     "twig/twig": {

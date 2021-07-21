@@ -8,15 +8,15 @@
 		<div class="collapse navbar-collapse col-8" id="navbarColor02">
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item">
-					<a class="nav-link active" href="{{ path('home') }}">Accueil
+					<a class="nav-link" href="{{ path('home') }}">Accueil
 						<span class="visually-hidden">(current)</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Demandes</a>
+					<a class="nav-link" href="{{ path('demandes')}}">Demandes</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Offres</a>
+					<a class="nav-link" href="{{ path('offres')}}">Offres</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Contact</a>
@@ -32,7 +32,7 @@
 				{% elseif is_granted("ROLE_ACHETEUR") %}
                  
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('home') }}">Mon Espace Acheteur</a>
+						<a class="nav-link" href="{{ path('acheteur') }}">Mon Espace Acheteur</a>
 					</li>
 					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </i>

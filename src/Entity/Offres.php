@@ -6,6 +6,8 @@ use App\Repository\OffresRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass=OffresRepository::class)
@@ -78,6 +80,7 @@ class Offres
     private $prix;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $date_offre;
@@ -88,12 +91,13 @@ class Offres
     private $description;
 
     /**
+     * @gedmo\Slug(fields={"titre"})
      * @ORM\Column(type="string", length=120)
      */
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="offre")
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="offre",cascade={"persist"})
      */
     private $image;
 
