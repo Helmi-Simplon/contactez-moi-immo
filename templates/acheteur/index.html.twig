@@ -1,57 +1,48 @@
 {% extends 'acheteur/base.html.twig' %}
 
-{% block title %}Hello AcheteurController!{% endblock %}
-{% block stylesheets %}
-<style>
-.wrapper {
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        grid-gap: 10px;
-        grid-auto-rows: minmax(100px, auto);
-        
-        }
-main    {
-        grid-column: 4 / 12;
-        grid-row: 1 / 8;
-        background-color: beige;
-        
-        }
-nav     {
-        grid-column: 1/4;
-        grid-row: 1 / 8;
-        border:1px solid gray;
-        box-shadow: -1em lightgray;
-        
-        }
-.list-item{
-        padding-top: 20%;
-        padding-bottom: 20%;
-        list-style: none;
-        }
-a       {
-        color:white;
-        text-decoration:none;
-        }
-      
-</style>
+{% block title %}CONTACTEZ MOI IMMO ESPACE ACHETEUR
 {% endblock %}
+{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+
 {% block body %}
 
+		<main>
+			<div class="container">
 
-<div class="container wrapper">
-<nav class="navbar navbar-expand-sm navbar-primary bg-primary">
-<ul class="group-item">
-    <legend text-center>Menu</legend>
-    <li class="list-item "><a  href="">Mon profil</a></li>
-    <li class="list-item "><a  href="">Gérer mon compte</a></li>
-    <li class="list-item "><a  href="">Déposer une demandes</a></li>
-    <li class="list-item "><a  href="">Gérer mes demandes</a></li>
-    <li class="list-item "><a  href="">Quitter</a></li>
+				<table class="table table-hover">
+					<legend>INFOS PROFIL</legend>
+					<hr>
 
-</ul>
-</nav>
-<main>
-<legend>test test test test test</legend>
-</main>
-</div>
+					<tbody>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>COURRIEL</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.email }}</td>
+						</tr>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>PRENOM</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.prenom }}</td>
+						</tr>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>NOM</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.nom }}</td>
+						</tr>
+						<tr class="table-active">
+							<th scope="row">
+								<h5>TELEPHONE</h5>
+							</th>
+							<td class="text-secondary">{{ app.user.numeroTelephone }}</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+		</main>
+	
 {% endblock %}
