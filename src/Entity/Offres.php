@@ -97,6 +97,11 @@ class Offres
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
@@ -301,6 +306,18 @@ class Offres
                 $image->setOffre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }

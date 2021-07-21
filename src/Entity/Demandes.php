@@ -94,6 +94,11 @@ class Demandes
      */
     private $acheteur;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
     public function __construct()
     {
         $this->adresse = new ArrayCollection();
@@ -280,6 +285,18 @@ class Demandes
     public function setAcheteur(?User $acheteur): self
     {
         $this->acheteur = $acheteur;
+
+        return $this;
+    }
+
+    public function getActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }
