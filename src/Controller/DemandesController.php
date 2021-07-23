@@ -60,6 +60,7 @@ public function detailDemande(Demandes $demande): Response
         if ($form->isSubmitted() && $form->isValid()) {
 
             $demande->setAcheteur($this->getUser());
+            $demande->setActif(true);
             $em = $this->getDoctrine()->getManager();
             $em->persist($demande);
             $em->flush();

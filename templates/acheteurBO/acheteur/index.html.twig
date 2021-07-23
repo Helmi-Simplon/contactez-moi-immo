@@ -1,11 +1,10 @@
-{% extends 'acheteur/base.html.twig' %}
+{% extends 'acheteurBO/base.html.twig' %}
 
 {% block title %}CONTACTEZ MOI IMMO ESPACE ACHETEUR
 {% endblock %}
 {% block titre %}MON ESPACE ACHETEUR{% endblock %}
 
 {% block body %}
-
 		<main>
 			<div class="container">
 
@@ -37,6 +36,16 @@
 								<h5>TELEPHONE</h5>
 							</th>
 							<td class="text-secondary">{{ app.user.numeroTelephone }}</td>
+						</tr>
+						<tr class="table-active">
+						<th scope="row">
+								<h5>STATUS</h5>
+						</th>
+						{% if app.user.actif == 1 %}
+							<td class="text-secondary">Actif</td>
+						{% else %}
+						<td class="text-secondary">	Inactif</td>
+						{% endif %}
 						</tr>
 
 					</tbody>

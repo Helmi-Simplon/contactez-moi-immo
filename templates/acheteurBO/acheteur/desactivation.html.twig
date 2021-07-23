@@ -1,0 +1,72 @@
+{% extends 'acheteurBO/base.html.twig' %}
+
+{% block title %}CONTACTEZ MOI IMMO ESPACE ACHETEUR
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+.hidden{
+	display:none;
+}
+</style>
+{% endblock %}
+{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+
+{% block body %}
+		<main>
+		<legend>DESACTIVER MON COMPTE</legend>
+					<hr>
+{% if app.request.pathInfo is same as path("acheteur_profil_desactivate",{id:app.user.id}) %}
+
+			<div class="container">
+    <div class="row">
+        {{ form_start(form) }}
+        <table>
+            <tbody>
+            <tr class="hidden">
+                <th>COURRIEL:</th>
+                <td>{{ form_widget(form.email) }}</td>
+            </tr>
+            <tr class="hidden">
+                <th>PRENOM:</th>
+                <td>{{ form_widget(form.prenom) }}</td>
+            </tr>
+            <tr class="hidden">
+                <th>NOM:</th>
+                <td>{{ form_widget(form.nom) }}</td>
+            </tr>
+			<tr class="hidden">
+                <th>TELEPHONE:</th>
+                <td>{{ form_widget(form.numero_telephone) }}</td>
+            </tr>
+			<tr>
+                <th>Etes vous sûr de vouloir désactiver votre compte ?</th>
+                <td class="hidden">{{ form_widget(form.actif) }}</td>
+            </tr>
+            <tr class="hidden">
+                <th>ROLE:</th>
+                <td>{{ form_widget(form.roles) }}</td>
+            </tr>
+			
+            </tr>
+            </tbody>
+        </table>
+		<div class="text-center">
+        {% if app.user.actif == 1 %}
+        <button type="submit" class="btn btn-primary my-3">Désactiver mon compte</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary my-3">Activer mon compte</button>
+        {% endif %}
+        </div>
+        {{ form_end(form) }}
+    </div>
+	
+</div>
+{% else %}
+<div class="text-center text-danger bg-primary h1">!!!Avertissement!!!</div>
+<div class="text-center text-danger bg-primary h1">!!!ACTION DANGEREUSE!!!</div>
+{% endif %}	
+		</main>
+
+
+{% endblock %}

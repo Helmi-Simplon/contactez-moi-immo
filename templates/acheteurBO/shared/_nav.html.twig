@@ -11,16 +11,20 @@
 				<ul>
 					<li class="list-item ">Gérer mon compte</li>
 					<li class="list">
-						<a href="">Mettre à jour mon compte</a>
+						<a href="{{ path('acheteur_profil_update',{id:app.user.id})}}">Mettre à jour mon compte</a>
 					</li>
 					<li class="list">
-						<a href="">Désactiver mon compte</a>
+					{% if app.user.actif == 1 %}
+						<a href="{{ path('acheteur_profil_desactivate',{id:app.user.id})}}">Désactiver mon compte</a>
+					{% else %}
+						<a href="{{ path('acheteur_profil_desactivate',{id:app.user.id})}}">Activer mon compte</a>
+					{% endif %}
 					</li>
 				</ul>
 				<ul>
 					<li class="list-item ">Gérer mes demandes</li>
 					<li class="list">
-						<a href="">Voir mes demandes</a>
+						<a href="{{ path('acheteurdemandes',{id:app.user.id})}}">Voir mes demandes</a>
 					</li>
 					<li class="list">
 						<a href="">Déposer une demandes</a>

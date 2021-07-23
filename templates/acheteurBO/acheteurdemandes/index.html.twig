@@ -1,0 +1,15 @@
+{% extends 'acheteurBO/base.html.twig' %}
+
+{% block title %}CONTACTEZ MOI IMMO MES DEMANDES{% endblock %}
+
+{% block body %}
+<main>
+{% for demande in demandes.acheteur.demande %}
+<li>{{ demande.titre}}</li>
+{% endfor %}
+
+
+{# <legend>{{ demandes.demande.titre }}</legend>
+{{ demandes.demande.description }}</p> #}
+</main>
+{% endblock %}
