@@ -1,0 +1,69 @@
+{% extends 'acheteurBO/base.html.twig' %}
+
+{% block title %} CONTACTEZ-MOI IMMO DEMANDES {% endblock %}
+{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+{% block body %}
+	<main>
+    <div class="container">
+    <legend>POSTER UNE DEMANDE</legend>
+					<hr>
+		<div class="container">
+    <div class="row">
+        {{ form_start(form) }}
+        <table>
+            <tbody>
+            <tr>
+                <th>Titre:</th>
+                <td>{{ form_widget(form.titre) }}</td>
+            </tr>
+            <tr>
+                <th>Superficie:</th>
+                <td>{{ form_widget(form.superficie) }}</td>
+            </tr>
+            <tr>
+                <th>Nombre de Pièces:</th>
+                <td>{{ form_widget(form.nbre_pieces) }}</td>
+            </tr>
+			<tr>
+                <th>Nombre d'Appartements:</th>
+                <td>{{ form_widget(form.nbre_appartements) }}</td>
+            </tr>
+			<tr>
+                <th>Nombre de Studios:</th>
+                <td>{{ form_widget(form.nbre_studios) }}</td>
+            </tr>
+            <tr>
+                <th>Place de Parking:</th>
+                <td>{{ form_widget(form.nbre_parking) }}</td>
+            </tr>
+            <tr>
+                <th>Cave:</th>
+                <td>{{ form_widget(form.cave) }}</td>
+            </tr>
+            <tr>
+                <th>Budget:</th>
+                <td>{{ form_widget(form.budget) }}</td>
+            </tr>
+            <tr>
+                <th>Description:</th>
+                <td>{{ form_widget(form.description) }}</td>
+            </tr>
+            <tr>
+                <th>Type du bien:</th>
+                <td>{{ form_widget(form.typebien) }}</td>
+            </tr>
+            <tr>
+                <th>Zone de votre recherche:</th>
+                <td>{{ form_widget(form.adresses) }}</td>
+            </tr>
+			
+            </tr>
+            </tbody>
+        </table>
+		
+        {{ form_end(form) }}
+    </div>
+    </div>
+	</main>
+{% endblock %}
+
