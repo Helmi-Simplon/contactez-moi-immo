@@ -1,15 +1,31 @@
 {% extends 'acheteurBO/base.html.twig' %}
 
 {% block title %}CONTACTEZ MOI IMMO MES DEMANDES{% endblock %}
-
+{% block titre %}MON ESPACE ACHETEUR{% endblock %}
 {% block body %}
 <main>
+<div class = "container">
+<legend>VOIR MES DEMANDES</legend>
+<hr>
+<div class="accordion" id="accordionExample">
+
 {% for demande in demandes.acheteur.demande %}
-<li>{{ demande.titre}}</li>
-{% endfor %}
+  
+   <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ demande.id }}">
+      <button class="accordion-button text-warning bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ demande.id }}" aria-expanded="true" aria-controls="collapse{{ demande.id }}">
+        #Ref000{{ demande.id }} : {{ demande.titre }}
+      </button>
+    </h2>
+    <div id="collapse{{ demande.id }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ demande.id }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      {{ demande.description }}
+      </div>
+    </div>
+  </div>
+ {% endfor %}
 
-
-{# <legend>{{ demandes.demande.titre }}</legend>
-{{ demandes.demande.description }}</p> #}
+</div>
+</div>
 </main>
 {% endblock %}
