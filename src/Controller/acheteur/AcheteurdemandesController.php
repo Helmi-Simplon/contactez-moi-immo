@@ -63,4 +63,27 @@ class AcheteurdemandesController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/acheteurdemandes/editer/{id}", name="acheteur_demandes_maj", requirements={"id"="\d+"})
+     */
+    public function MajDemande(Demandes $demandes, Request $request): Response
+    {
+       // $demandes = $this->getDoctrine()->getRepository(Demandes::class)->findBy(['acheteur' => $id]);
+       $form = $this->createForm(DemandesType::class, $demandes);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($demandes);
+            $em->flush();
+            $this->addFlash('success', 'Votre demande a été modifiée avec succès !');
+            return $this->redirectToRoute('demandes');
+        }
+        return $this->render('acheteurBO/acheteurdemandes/maj_demande.html.twig', [
+            'controller_name' => 'AcheteurdemandesController',
+            'form' => $form->createView(),
+           
+        ]);
+    }
+
 }
