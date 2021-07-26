@@ -85,5 +85,19 @@ class AcheteurdemandesController extends AbstractController
            
         ]);
     }
+    
+    /**
+     * @Route("/acheteurdemandes/activation/{id}", name="acheteur_demandes_activation", requirements={"id"="\d+"})
+     */
+    public function activerDemande(Demandes $demandes): Response
+    {
+        //dd($demandes);
+        $demandes->setActif( ($demandes->getActif()) ? false : true );
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($demandes);
+        $em->flush();
+        return $this->redirectToRoute('acheteur');
+    }
 
 }
