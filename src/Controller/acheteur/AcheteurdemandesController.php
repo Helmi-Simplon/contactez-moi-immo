@@ -12,13 +12,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AcheteurdemandesController extends AbstractController
 {
     /**
-     * @Route("/acheteurdemandes/{id}", name="acheteurdemandes", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/acheteurdemandes/{acheteur}", name="acheteurdemandes", methods={"GET"}, requirements={"acheteur"="\d+"})
      */
     public function index(Demandes $demandes): Response
     {
+     
         return $this->render('acheteurBO/acheteurdemandes/index.html.twig', [
             'controller_name' => 'AcheteurdemandesController',
             'demandes' => $demandes,
+
            
         ]);
     }
