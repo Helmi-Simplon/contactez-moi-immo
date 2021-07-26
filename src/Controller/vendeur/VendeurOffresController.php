@@ -78,4 +78,21 @@ class VendeurOffresController extends AbstractController
            
         ]);
     }
+
+    /**
+     * @Route("/vendeur/offres/activation/{id}", name="vendeur_offres_activation", requirements={"id"="\d+"})
+     */
+    public function activerOffre(Offres $offres, Request $request): Response
+    {
+        //dd($offres);
+        $offres->setActif( ($offres->getActif()) ? false : true );
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($offres);
+        $em->flush();
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+       
+    }
+
 }
