@@ -16,16 +16,16 @@
 		<main>
         <div class="container">
         {% if app.user.actif == 1 %}
-		<h4>DESACTIVER MON COMPTE</h4>
+		<h4 class="text-secondary">DESACTIVER MON COMPTE</h4>
 					<hr>
-        <div class="h6">Êtes-vous sûr de vouloir désactiver votre compte? Si oui, sachez que votre profil ne sera plus visible sur la page des offres!</div>
+        <div class="text-secondary">Êtes-vous sûr de vouloir désactiver votre compte? Si oui, sachez que votre profil ne sera plus visible sur la page des offres!</div>
 
 		<div class="text-center">
         <a class="btn btn-primary my-3 h6" href="{{ path('vendeur_profil_desactivate',{id:app.user.id})}}">Désactiver mon compte</a>
         {% else %}
         <h4>ACTIVER MON COMPTE</h4>
 					<hr>
-        <div class="h6">Vous voulez que votre profil réapparaisse dans la liste des offres? Cliquez sur le bouton ci-dessous :</div>
+        <div class="text-secondary">Vous voulez que votre profil réapparaisse dans la liste des offres? Cliquez sur le bouton ci-dessous :</div>
 
 		<div class="text-center">
         <a class="btn btn-primary my-3" href="{{ path('vendeur_profil_desactivate',{id:app.user.id})}}">Activer mon compte</a>
