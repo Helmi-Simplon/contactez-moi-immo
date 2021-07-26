@@ -1,0 +1,41 @@
+
+		<nav class="navbar navbar-expand-sm navbar-primary bg-primary">
+			<ul class="group-item">
+				<h3 class="text-warning">Menu</h3>
+				<ul>
+					<li class="list-item ">Mon profil</li>
+					<li class="list">
+						<a href="{{ path('vendeur')}}">Infos profil</a>
+					</li>
+				</ul>
+				<ul>
+					<li class="list-item ">Gérer mon compte</li>
+					<li class="list">
+						<a href="">Mettre à jour mon compte</a>
+					</li>
+					<li class="list">
+					{% if app.user.actif == 1 %}
+						<a href="">Désactiver mon compte</a>
+					{% else %}
+						<a href="">Activer mon compte</a>
+					{% endif %}
+					</li>
+				</ul>
+				<ul>
+					<li class="list-item ">Gérer mes offres</li>
+					<li class="list">
+						<a href="">Voir mes offres</a>
+					</li>
+					<li class="list">
+						<a href="">Déposer une offre</a>
+					</li>
+					<li class="list">
+						<a href="">Mettre à jour/Supprimer mes offres</a>
+					</li>
+				</ul>
+				<li class="list-item">
+					<a class="nav-link text-warning" href="{{ path('home')}}">Quitter</a>
+				</li>
+
+			</ul>
+		</nav>

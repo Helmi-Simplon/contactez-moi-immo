@@ -1,3 +1,8 @@
+		
+		body	{
+			background-image: linear-gradient( 65.9deg,  rgba(85,228,224,1) 5.5%, rgba(75,68,224,0.74) 54.2%, rgba(64,198,238,1) 55.2%, rgba(177,36,224,1) 98.4% );
+		}
+		
 		.titreBO{
 			text-align:center;
 			color: wheat;
@@ -15,7 +20,7 @@
 		main {
 			grid-column: 4 / 12;
 			grid-row: 1 / 8;
-			background-color: beige;
+			background-image: linear-gradient( 359.8deg,  rgba(252,255,222,1) 2.2%, rgba(182,241,171,1) 99.3% );
 			padding-top: 15%;
 
 		}
