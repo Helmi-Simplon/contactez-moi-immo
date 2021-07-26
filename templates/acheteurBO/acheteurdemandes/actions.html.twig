@@ -25,7 +25,7 @@
       <td><h6 class="text-warning">#Ref000{{ demande.id }}</h6></td>
       
       <td><h6 class="text-warning">{{ demande.titre }}</h6></td>
-      <td class="text-center"><a class="btn btn-dark"href="{{ path('acheteur_demandes_maj',{id:demande.id})}}"><h6 class="text-light">Editer</h6></a>
+      <td class="text-center"><a class="btn btn-dark"href=""><h6 class="text-light">Editer</h6></a>
       {% if demande.actif == 1 %}
       <a class="btn btn-dark"href=""><h6 class="text-info">Archiver</h6></a>
       {% else %}
@@ -40,3 +40,4 @@
 </table>
 </div>
 </main>
+{% endblock %}
