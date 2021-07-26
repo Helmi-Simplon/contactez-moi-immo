@@ -49,4 +49,18 @@ class AcheteurdemandesController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/acheteurdemandes/tab/{acheteur}", name="acheteur_demandes_bo", methods={"GET"}, requirements={"acheteur"="\d+"})
+     */
+    public function ActionsDemande(Demandes $demandes): Response
+    {
+       // $demandes = $this->getDoctrine()->getRepository(Demandes::class)->findBy(['acheteur' => $id]);
+       
+        return $this->render('acheteurBO/acheteurdemandes/actions.html.twig', [
+            'controller_name' => 'AcheteurdemandesController',
+            'demandes' => $demandes,
+           
+        ]);
+    }
+
 }
