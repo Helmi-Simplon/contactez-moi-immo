@@ -100,4 +100,17 @@ class AcheteurdemandesController extends AbstractController
         return $this->redirectToRoute('acheteur');
     }
 
+    /**
+     * @Route("/acheteurdemandes/delete/{id}", name="acheteur_demandes_suppression", requirements={"id"="\d+"})
+     */
+    public function supprimerDemande(Demandes $demandes): Response
+    {
+        //dd($demandes);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($demandes);
+        $em->flush();
+        $this->addFlash('success', 'Votre article a été supprimé avec succès !');
+        return $this->redirectToRoute('acheteur');
+    }
+
 }
