@@ -45,4 +45,18 @@ class VendeurOffresController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+     /**
+     * @Route("/vendeur/offres/actions/{vendeur}", name="vendeur_offres_actions", methods={"GET"}, requirements={"vendeur"="\d+"})
+     */
+    public function ActionsOffre(Offres $offres): Response
+    {
+       // $offres = $this->getDoctrine()->getRepository(Offres::class)->findBy(['vendeur' => $id]);
+       
+        return $this->render('vendeurBO/vendeur_offres/actions.html.twig', [
+            'controller_name' => 'AcheteurdemandesController',
+            'offres' => $offres,
+           
+        ]);
+    }
 }
