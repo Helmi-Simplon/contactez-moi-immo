@@ -15,9 +15,9 @@
 					</li>
 					<li class="list">
 					{% if app.user.actif == 1 %}
-						<a href="">Désactiver mon compte</a>
+						<a href="{{ path('vendeur_desactivation')}}">Désactiver mon compte</a>
 					{% else %}
-						<a href="">Activer mon compte</a>
+						<a href="{{ path('vendeur_desactivation')}}">Activer mon compte</a>
 					{% endif %}
 					</li>
 				</ul>

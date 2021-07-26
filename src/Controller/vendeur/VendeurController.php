@@ -41,4 +41,29 @@ class VendeurController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/vendeur/desactivation", name="vendeur_desactivation")
+     */
+    public function desctivationPage(): Response
+    {
+        return $this->render('vendeurBO/vendeur/desactivation.html.twig', [
+            'controller_name' => 'VendeurController',
+        ]);
+    }
+
+
+     /**
+     * @Route("/vendeur/profil/desactivate/{id}", name="vendeur_profil_desactivate", requirements={"id"="\d+"})
+     */
+    public function DesactivateVendeur(User $user, Request $request): Response
+    {
+        $user->setActif( ($user->getActif()) ? false : true );
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('vendeur');
+        
+   
+    }
 }
