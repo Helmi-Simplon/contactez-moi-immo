@@ -1,0 +1,42 @@
+{% extends 'acheteurBO/base.html.twig' %}
+
+{% block title %}CONTACTEZ MOI IMMO MES DEMANDES{% endblock %}
+{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+
+{% block body %}
+<main>
+<div class = "container">
+<legend>METTRE A JOUR MES DEMANDES</legend>
+<hr>
+ <table class="table table-dark table-hover text-warning">
+  <thead>
+    <tr>
+      <th scope="col"><h5 class="text-success">Référence</h5></th>
+      <th scope="col"><h5 class="text-success">Titre</h5></th>
+      <th scope="col"><h5 class="text-success text-center">Action</h5></th></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+{# {{ dump(demandes)}} #}
+{% for demande in app.user.demande %}
+ 
+    <tr>
+      <td><h6 class="text-warning">#Ref000{{ demande.id }}</h6></td>
+      
+      <td><h6 class="text-warning">{{ demande.titre }}</h6></td>
+      <td class="text-center"><a class="btn btn-dark"href="{{ path('acheteur_demandes_maj',{id:demande.id})}}"><h6 class="text-light">Editer</h6></a>
+      {% if demande.actif == 1 %}
+      <a class="btn btn-dark"href=""><h6 class="text-info">Archiver</h6></a>
+      {% else %}
+      <a class="btn btn-dark"href=""><h6 class="text-info">Publier</h6></a>
+      {% endif %}
+      <a class="btn btn-dark "><h6 class="text-danger">Supprimer</h6></a></td>
+    </tr>
+
+ {% endfor %}
+
+</tbody>
+</table>
+</div>
+</main>
