@@ -42,7 +42,7 @@ class VendeurController extends AbstractController
         ]);
     }
     /**
-     * @Route("/vendeur/desactivation", name="vendeur_desactivation")
+     * @Route("/vendeur/profil/desactivation", name="vendeur_desactivation")
      */
     public function desctivationPage(): Response
     {
@@ -53,7 +53,7 @@ class VendeurController extends AbstractController
 
 
      /**
-     * @Route("/vendeur/profil/desactivate/{id}", name="vendeur_profil_desactivate", requirements={"id"="\d+"})
+     * @Route("/vendeur/profil/desactivation/{id}", name="vendeur_profil_desactivate", requirements={"id"="\d+"})
      */
     public function DesactivateVendeur(User $user, Request $request): Response
     {
