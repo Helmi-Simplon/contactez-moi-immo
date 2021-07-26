@@ -25,7 +25,7 @@
       <td><h6 class="text-warning">#Ref000{{ offre.id }}</h6></td>
       
       <td><h6 class="text-warning">{{ offre.titre }}</h6></td>
-      <td class="text-center"><a class="btn btn-dark"href=""><h6 class="text-light">Editer</h6></a>
+      <td class="text-center"><a class="btn btn-dark"href="{{ path('vendeur_offres_maj',{id:offre.id})}}"><h6 class="text-light">Editer</h6></a>
       {% if offre.actif == 1 %}
       <a class="btn btn-dark"href=""><h6 class="text-info">Archiver</h6></a>
       {% else %}
