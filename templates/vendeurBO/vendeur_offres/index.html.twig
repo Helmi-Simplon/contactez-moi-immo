@@ -1,0 +1,31 @@
+{% extends 'acheteurBO/base.html.twig' %}
+
+{% block title %}CONTACTEZ MOI IMMO MES OFFRES{% endblock %}
+{% block titre %}MON ESPACE VENDEUR{% endblock %}
+{% block body %}
+<main>
+<div class = "container">
+<div class="h4">VOIR MES OFFRES</div>
+<hr>
+<div class="accordion" id="accordionExample">
+
+{% for offre in offres.vendeur.offre %}
+  
+   <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ offre.id }}">
+      <button class="accordion-button text-warning bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ offre.id }}" aria-expanded="true" aria-controls="collapse{{ offre.id }}">
+        #Ref000{{ offre.id }} : {{ offre.titre }}
+      </button>
+    </h2>
+    <div id="collapse{{ offre.id }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ offre.id }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      {{ offre.description }}
+      </div>
+    </div>
+  </div>
+ {% endfor %}
+
+</div>
+</div>
+</main>
+{% endblock %}
