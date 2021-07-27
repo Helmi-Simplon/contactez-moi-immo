@@ -10,7 +10,7 @@
 		           and uncomment the following Encore helpers to start using Symfony UX #}
 
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/acheteurBO/style.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/css/vendeurBO/style.css') }}">
 
 		{% block stylesheets %}
 			{#{{ encore_entry_link_tags('app') }}#}
@@ -32,7 +32,7 @@
 		
         </div></div></div></div></header>
         <div class="container wrapper">
-        {% include 'acheteurBO/shared/_nav.html.twig' %}
+        {% include 'vendeurBO/shared/_nav.html.twig' %}
         {% block body %}{% endblock %}
         </div>
         {% include 'shared/_footer.html.twig' %}

@@ -1,3 +1,4 @@
+		
 		.titreBO{
 			text-align:center;
 			color: wheat;
@@ -15,7 +16,7 @@
 		main {
 			grid-column: 4 / 12;
 			grid-row: 1 / 8;
-			background-color: beige;
+			background: linear-gradient( 109.6deg,  rgba(255,179,189,1) 1.8%, rgba(254,248,154,1) 50.6%, rgba(161,224,186,1) 100.3% );
 			padding-top: 15%;
 
 		}
