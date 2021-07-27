@@ -23,11 +23,17 @@
 		{% include 'shared/_nav.html.twig' %}
         {% include 'shared/_header.html.twig' %}
         <h1 style="color:#fff;padding-top:100px;text-align:center">{% block titre %}{% endblock %}</h1>
+           	
 				</div>
+               
 			</div>
 		</div>
 	</div>
+    
 </header>
+ {% for message in app.flashes('success') %}
+        <div class="alert alert-light text-center" role="alert" style="font-size:100%">{{ message }}</div>
+{% endfor %} 
         {% block body %}{% endblock %}
 
         {% include 'shared/_footer.html.twig' %}

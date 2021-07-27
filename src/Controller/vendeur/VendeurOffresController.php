@@ -65,13 +65,16 @@ class VendeurOffresController extends AbstractController
     {
        $form = $this->createForm(OffresType::class, $offres);
         $form->handleRequest($request);
-        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($offres);
             $em->flush();
             $this->addFlash('success', 'Votre offre a été modifiée avec succès !');
-            return $this->redirectToRoute('offres');
+            //$referer = $request->headers->get('referer');
+            // dd($this->getUser()->getId());
+            return $this->redirectToRoute('vendeur_offres_actions',[
+                'vendeur' => $this->getUser()->getId(),
+            ]);
         }
         return $this->render('vendeurBO/vendeur_offres/maj_offre.html.twig', [
             'form' => $form->createView(),
@@ -90,8 +93,14 @@ class VendeurOffresController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->persist($offres);
         $em->flush();
-        $referer = $request->headers->get('referer');
-        return $this->redirect($referer);
+        if($offres->getActif() === false){
+        $this->addFlash('success', 'Votre offre a été désactivée avec succès !');
+        }else{
+        $this->addFlash('success', 'Votre offre a été activée avec succès !');
+        }
+        return $this->redirectToRoute('vendeur_offres_actions',[
+            'vendeur' => $this->getUser()->getId(),
+        ]);
        
     }
 
@@ -105,8 +114,9 @@ class VendeurOffresController extends AbstractController
         $em->remove($offres);
         $em->flush();
         $this->addFlash('success', 'Votre offre a été supprimé avec succès !');
-        $referer = $request->headers->get('referer');
-        return $this->redirect($referer);
+        return $this->redirectToRoute('vendeur_offres_actions',[
+            'vendeur' => $this->getUser()->getId(),
+        ]);
     }
 
 

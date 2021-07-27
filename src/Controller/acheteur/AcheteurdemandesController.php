@@ -77,7 +77,9 @@ class AcheteurdemandesController extends AbstractController
             $em->persist($demandes);
             $em->flush();
             $this->addFlash('success', 'Votre demande a été modifiée avec succès !');
-            return $this->redirectToRoute('demandes');
+            return $this->redirectToRoute('acheteur_demandes_bo',[
+                'acheteur' => $this->getUser()->getId(),
+            ]);
         }
         return $this->render('acheteurBO/acheteurdemandes/maj_demande.html.twig', [
             'controller_name' => 'AcheteurdemandesController',
@@ -89,7 +91,7 @@ class AcheteurdemandesController extends AbstractController
     /**
      * @Route("/acheteurdemandes/activation/{id}", name="acheteur_demandes_activation", requirements={"id"="\d+"})
      */
-    public function activerDemande(Demandes $demandes): Response
+    public function activerDemande(Demandes $demandes,Request $request): Response
     {
         //dd($demandes);
         $demandes->setActif( ($demandes->getActif()) ? false : true );
@@ -97,7 +99,14 @@ class AcheteurdemandesController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->persist($demandes);
         $em->flush();
-        return $this->redirectToRoute('acheteur');
+        if($demandes->getActif() === false){
+            $this->addFlash('success', 'Votre demande a été désactivée avec succès !');
+            }else{
+            $this->addFlash('success', 'Votre demande a été activée avec succès !');
+            }
+            return $this->redirectToRoute('acheteur_demandes_bo',[
+                'acheteur' => $this->getUser()->getId(),
+            ]);
     }
 
     /**
@@ -109,8 +118,10 @@ class AcheteurdemandesController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($demandes);
         $em->flush();
-        $this->addFlash('success', 'Votre article a été supprimé avec succès !');
-        return $this->redirectToRoute('acheteur');
+        $this->addFlash('success', 'Votre demande a été supprimé avec succès !');
+        return $this->redirectToRoute('acheteur_demandes_bo',[
+            'acheteur' => $this->getUser()->getId(),
+        ]);
     }
 
 }
