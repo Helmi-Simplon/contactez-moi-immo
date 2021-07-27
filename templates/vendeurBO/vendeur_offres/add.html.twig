@@ -60,11 +60,14 @@
                 <th>Vos images en pièces-jointes:</th>
                 <td>{{ form_widget(form.image) }}</td>
             </tr>
+            <tr>
+                <th></th>
+                <td class="text-center">{{ form_widget(form.Valider,{ Label : "Ajouter"}) }}</td>
+            </tr>
             
             </tr>
             </tbody>
         </table>
-        <div class="text-center my-3">{{ form_widget(form.Valider) }}<div>
 		
         {{ form_end(form) }}
     </div>

@@ -95,4 +95,19 @@ class VendeurOffresController extends AbstractController
        
     }
 
+     /**
+     * @Route("/vendeur/offres/suppression/{id}", name="vendeur_offres_suppression", requirements={"id"="\d+"})
+     */
+    public function supprimerDemande(Offres $offres,Request $request): Response
+    {
+        //dd($offres);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($offres);
+        $em->flush();
+        $this->addFlash('success', 'Votre offre a été supprimé avec succès !');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+    }
+
+
 }
