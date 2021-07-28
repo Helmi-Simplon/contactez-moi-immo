@@ -33,7 +33,7 @@ class AdminController extends AbstractController
     public function gestionUtilisateur(UserRepository $userRepository): Response
     {
         $users = $userRepository->findAll();
-        return $this->render('admin/utilisateurs.html.twig', [
+        return $this->render('adminBO/admin/utilisateurs.html.twig', [
             'controller_name' => 'AdminController',
             'users' => $users,
         ]);
