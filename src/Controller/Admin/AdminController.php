@@ -72,5 +72,16 @@ class AdminController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('admin_gestion_utilisateurs');
     }
+    /**
+     * @Route("/admin/gestion-utilisateurs/suppression/{id}", name="admin_utilisateur_suppression", requirements={"id"="\d+"})
+     */
+    public function deletePost(User $user): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès !');
+        return $this->redirectToRoute('admin_gestion_utilisateurs');
+    }
 
 }

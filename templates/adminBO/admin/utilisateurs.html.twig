@@ -52,8 +52,8 @@
       {% else %}
       <td>Désactivé</td>
       {% endif %}
-      </tr>
-      <tr>
+    </tr>
+    <tr>
       <td class="text-center" colspan="9">
       
      <a class="btn btn-sm btn-outline-success" href="{{ path('admin_utilisateur_modification',{id:user.id})}}" >Modifier</a>
@@ -62,7 +62,8 @@
       {% else %}
       <a class="btn btn-sm btn-outline-warning" href="{{ path('admin_utilisateur_activation',{id:user.id})}}">Activer</a>
       {% endif %}
-        <a class="btn btn-sm btn-outline-danger" href="">Supprimer</a>    </tr>
+        <a class="btn btn-sm btn-outline-danger" href="">Supprimer</a>    
+    </tr>
     {% endfor %}
 
     </tbody>
