@@ -62,12 +62,43 @@
       {% else %}
       <a class="btn btn-sm btn-outline-warning" href="{{ path('admin_utilisateur_activation',{id:user.id})}}">Activer</a>
       {% endif %}
-        <a class="btn btn-sm btn-outline-danger" href="">Supprimer</a>    
+      <a href="" class="btn btn-outline-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ user.id }}" data-title="{{ user.email }}">Supprimer</a>
+      </td>
     </tr>
     {% endfor %}
 
     </tbody>
 </table>
 </div>
- 
+ <!-- Modal -->
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Supprimer un article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <a href="" class="btn btn-primary">Supprimer</a>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            let btdeletes = document.querySelectorAll(".modal-trigger")
+            for(let btdelete of btdeletes) {
+                btdelete.addEventListener("click", function(){
+                    document.querySelector(".modal-footer a").href=`/admin/gestion-utilisateurs/suppression/${this.dataset.id}`
+                    document.querySelector(".modal-body").innerText = `Etes-vous sûr de vouloir supprimer "${this.dataset.title}"`
+                })
+            }
+        }
+    </script>
 {% endblock %}
