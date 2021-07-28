@@ -34,6 +34,15 @@ class DemandesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function countDemandes()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('count(d.id) as total')
+            ->getQuery()
+            ->getScalarResult();
+    }
+
     
 
     /*

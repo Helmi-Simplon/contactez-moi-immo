@@ -59,4 +59,12 @@ class OffresRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function countOffres()
+    {
+        return $this->createQueryBuilder('o')
+            ->select('count(o.id) as total')
+            ->getQuery()
+            ->getScalarResult();
+    }
 }
