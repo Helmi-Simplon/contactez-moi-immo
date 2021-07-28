@@ -26,4 +26,16 @@ class AdminController extends AbstractController
             'countOffres' =>$countOffres,
         ]);
     }
+
+    /**
+     * @Route("/admin/gestion-utilisateurs", name="admin_gestion_utilisateurs")
+     */
+    public function gestionUtilisateur(UserRepository $userRepository): Response
+    {
+        $users = $userRepository->findAll();
+        return $this->render('admin/utilisateurs.html.twig', [
+            'controller_name' => 'AdminController',
+            'users' => $users,
+        ]);
+    }
 }
