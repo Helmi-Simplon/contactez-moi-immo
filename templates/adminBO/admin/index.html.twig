@@ -1,6 +1,6 @@
 {% extends 'adminBO/base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,33 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container">
+    <h1>TABLEAU DE BORD</h1>
+    <hr>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Utilisateur/Desktop/contactez-moi-immo/contactez-moi-immo/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Utilisateur/Desktop/contactez-moi-immo/contactez-moi-immo/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
+    <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><img  src="{{ asset('assets/admin/images/users.png') }}" class="rounded-circle" width="155" /></th>
+                                            <th scope="col"><img  src="{{ asset('assets/admin/images/acheteur.jpg') }}" class="rounded-circle" width="160" /></th>
+                                            <th scope="col"><img  src="{{ asset('assets/admin/images/vendeur.jpg') }}" class="rounded-circle" width="150" height="150" /></th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     <tr>
+                                            <td class="h5"> Utilisateurs : 
+                                            {% for count in countUser %} {{ count.total }}</td>{% endfor %}
+                                            <td class="h5"> Demandes : 11</td>
+                                            <td class="h5"> Offres : 5</td>
+                                            
+                                        </tr>
+
+                                            
+
+                                    </tbody>
+                                </table>
+
+    
 </div>
 {% endblock %}
