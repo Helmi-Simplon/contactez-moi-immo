@@ -29,13 +29,14 @@ class UserType extends AbstractType
                         'Acheteur' => 'ROLE_ACHETEUR',
                         'Vendeur' => 'ROLE_VENDEUR',
                         'Administrateur' => 'ROLE_ADMIN',
-                    ),
+                    )
+                ),
                     'required' => true,
                     'expanded' =>true,
                     'multiple'  => true,
                     
                 )
-            )
+            
             )
             //->add('password')
             ->add('nom')

@@ -55,10 +55,22 @@ class AdminController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'L\'utilisateur a été modifié avec succès !');
         return $this->redirectToRoute('admin_gestion_utilisateurs');
-    }
-    return $this->render('admin/maj.html.twig', [
+        }
+        return $this->render('adminBO/admin/maj.html.twig', [
         'form' => $form->createView(),
-    ]);
-}
+        ]);
+    }
+    /**
+     * @Route("/admin/gestion-utilisateurs/activation/{id}", name="admin_utilisateur_activation", requirements={"id"="\d+"})
+     */
+    public function activationUtilisateur(User $user): Response
+    {
+        //dd($user);
+        $user->setActif( ($user->getActif()) ? false : true );
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('admin_gestion_utilisateurs');
+    }
 
 }

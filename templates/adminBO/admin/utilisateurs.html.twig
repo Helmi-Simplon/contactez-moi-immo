@@ -56,11 +56,11 @@
       <tr>
       <td class="text-center" colspan="9">
       
-     <a class="btn btn-sm btn-outline-success" href="" >Modifier</a>
+     <a class="btn btn-sm btn-outline-success" href="{{ path('admin_utilisateur_modification',{id:user.id})}}" >Modifier</a>
      {% if user.actif == 1 %}
-      <a class="btn btn-sm btn-outline-warning" href="">Désactiver</a>
+      <a class="btn btn-sm btn-outline-warning" href="{{ path('admin_utilisateur_activation',{id:user.id})}}">Désactiver</a>
       {% else %}
-      <a class="btn btn-sm btn-outline-warning" href="">Activer</a>
+      <a class="btn btn-sm btn-outline-warning" href="{{ path('admin_utilisateur_activation',{id:user.id})}}">Activer</a>
       {% endif %}
         <a class="btn btn-sm btn-outline-danger" href="">Supprimer</a>    </tr>
     {% endfor %}
