@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
-		<a class="navbar-brand col-4 text-center" href="#">CONTACTEZ-MOI IMMO</a>
+		<a class="navbar-brand col-4 text-center" href="{{ path('home') }}">CONTACTEZ-MOI IMMO</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -28,6 +28,12 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_register') }}">Enregistrement</a>
 					</li>
+				{% elseif is_granted("ROLE_ADMIN") %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('admin') }}">Back Office ADMIN</a>
+					</li>
+					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </i>
                     
 				{% elseif is_granted("ROLE_ACHETEUR") %}
                  
@@ -36,12 +42,14 @@
 					</li>
 					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </i>
-                    {% else %}
+                    {% elseif is_granted("ROLE_VENDEUR") %}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('vendeur') }}">Mon Espace Vendeur</a>
 					</li>
 					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </i>
+					
+					
 				{% endif %}
 			</ul>
 		</div>

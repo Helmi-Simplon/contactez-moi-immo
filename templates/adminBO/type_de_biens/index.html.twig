@@ -1,52 +1,77 @@
 {% extends 'adminBO/base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}CONTACTEZ MOI IMMO ADMIN{% endblock %}
 
 {% block body %}
 <style>
     /* .x{ margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; } */
     .container { background: #F5F5F5; padding: 2px 6px; }
     tbody{ font-size:small;}
+    .btn{border-radius:3rem}
     
     
 
 </style>
 
 <div class="container">
-    <h1>TYPES DE BIENS</h1><a class="btn btn-dark" href="">Créer un nouveau type</a>
+    <h1>TYPES DE BIENS</h1><a class="btn btn-dark" href="{{path('admin_type_de_biens_ajouter')}}">Créer un nouveau type</a>
     <hr>
-    <table class="table table-hover">
-  <thead class="text-primary bg-light">
+    <table class="table table-hover table-sm">
+  <thead class="text-primary bg-light text-center">
     <tr>
       <th scope="col">id</th>
       <th scope="col">type</th>
       <th scope="col">slug</th>
+      <th class="text-center"scope="col">Action</th>
     </tr>
   </thead>
-  <tfoot class="text-primary bg-light">
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">type</th>
-      <th scope="col">slug</th>
-    </tr>
-  </tfoot>
-  <tbody>
+  
+  <tbody class="text-primary bg-light text-center">
   {% for type in types %}
     <tr>
       <td>{{ type.id }}</td>
       <td>{{ type.type }}</td>
       <td>{{ type.slug }}</td>
-    <tr>
+   
       <td class="text-center" colspan="9">
       
-     <a class="btn btn-sm btn-outline-success" href="" >Modifier</a>
-     <a class="btn btn-sm btn-outline-danger" href="" >Supprimer</a>
-      </td>
+     <a class="btn btn-sm btn-outline-success" href="{{path('admin_type_de_biens_modifier',{id:type.id})}}">Modifier</a>
+    <a class="btn btn-sm btn-outline-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ type.id }}" data-reference="{{ type.type }}">Supprimer</a></td>
     </tr>
     {% endfor %}
 
     </tbody>
 </table>
 </div>
-
+<!-- Modal -->
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Supprimer un type de biens</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <a href="" class="btn btn-primary">Supprimer</a>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            let btdeletes = document.querySelectorAll(".modal-trigger")
+            for(let btdelete of btdeletes) {
+                btdelete.addEventListener("click", function(){
+                    document.querySelector(".modal-footer a").href=`/acheteurdemandes/delete/${this.dataset.id}`
+                    document.querySelector(".modal-body").innerText = `Êtes-vous sûr de vouloir supprimer le type ${this.dataset.reference} ?`
+                })
+            }
+        }
+    </script>
 {% endblock %}

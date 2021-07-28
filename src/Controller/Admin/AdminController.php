@@ -75,7 +75,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/gestion-utilisateurs/suppression/{id}", name="admin_utilisateur_suppression", requirements={"id"="\d+"})
      */
-    public function deletePost(User $user): Response
+    public function SupprimerUtlisateur(User $user): Response
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);

@@ -29,11 +29,12 @@
 		<h1 class="titreBO"> 
         {% block titre %}{% endblock %}
         </h1>
+		{% for message in app.flashes('success') %}
+        <div class="alert alert-light" role="alert">{{ message }}</div>
+    	{% endfor %} 
        </div></div></div></div></header>
         <div class="container wrapper">
-		{% for message in app.flashes('success') %}
-        <div class="alert alert-success" role="alert">{{ message }}</div>
-    	{% endfor %} 
+		
         {% include 'vendeurBO/shared/_nav.html.twig' %}
 
         {% block body %}{% endblock %}
