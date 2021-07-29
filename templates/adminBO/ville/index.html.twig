@@ -14,29 +14,29 @@
 </style>
 
 <div class="container">
-    <h1>TYPES DE BIENS</h1><a class="btn btn-dark" href="{{path('admin_type_de_biens_ajouter')}}">Créer un nouveau type</a>
+    <h1>VILLES</h1><a class="btn btn-dark" href="{{path('admin_ville_ajouter')}}">Ajouter une ville</a>
     <hr>
     <table class="table table-hover table-sm">
   <thead class="text-primary bg-light text-center">
     <tr>
       <th scope="col">id</th>
-      <th scope="col">type</th>
-      <th scope="col">slug</th>
+      <th scope="col">ville</th>
+      <th scope="col">code postal</th>
       <th class="text-center"scope="col">Action</th>
     </tr>
   </thead>
   
   <tbody class="text-primary bg-light text-center">
-  {% for type in types %}
+  {% for adresse in adresses %}
     <tr>
-      <td>{{ type.id }}</td>
-      <td>{{ type.type }}</td>
-      <td>{{ type.slug }}</td>
+      <td>{{ adresse.id }}</td>
+      <td>{{ adresse.ville }}</td>
+      <td>{{ adresse.codePostal }}</td>
    
       <td class="text-center" colspan="9">
       
-     <a class="btn btn-sm btn-outline-success" href="{{path('admin_type_de_biens_modifier',{id:type.id})}}">Modifier</a>
-    <a class="btn btn-sm btn-outline-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ type.id }}" data-reference="{{ type.type }}">Supprimer</a></td>
+     <a class="btn btn-sm btn-outline-success" href="{{path('admin_ville_modifier',{id:adresse.id})}}">Modifier</a>
+    <a class="btn btn-sm btn-outline-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ adresse.id }}" data-reference="{{ adresse.ville }}">Supprimer</a></td>
     </tr>
     {% endfor %}
 
@@ -48,7 +48,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Supprimer un type de biens</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Supprimer une ville</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -68,8 +68,8 @@
             let btdeletes = document.querySelectorAll(".modal-trigger")
             for(let btdelete of btdeletes) {
                 btdelete.addEventListener("click", function(){
-                    document.querySelector(".modal-footer a").href=`/admin/type-de-biens/suppression/${this.dataset.id}`
-                    document.querySelector(".modal-body").innerText = `Êtes-vous sûr de vouloir supprimer le type ${this.dataset.reference} ?`
+                    document.querySelector(".modal-footer a").href=`/admin/ville/suppression/${this.dataset.id}`
+                    document.querySelector(".modal-body").innerText = `Êtes-vous sûr de vouloir supprimer la ville ${this.dataset.reference} ?`
                 })
             }
         }

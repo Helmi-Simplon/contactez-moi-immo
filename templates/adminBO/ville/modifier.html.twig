@@ -1,0 +1,45 @@
+{% extends 'adminBO/base.html.twig' %}
+
+{% block title %}CONTACTEZ MOI IMMO ADMIN
+{% endblock %}
+
+{% block body %}
+	<style>
+		
+		tbody {
+			font-size: 12;
+		}
+		.btn {
+			border-radius: 3rem
+		}
+	</style>
+
+	<main>
+		<div class="container">
+			<h4 class="text-secondary">Ville</h4>
+			<hr>
+			<div class="container">
+				<div class="row">
+					{{ form_start(form) }}
+					<table>
+						<tbody>
+							<tr>
+								<td> Ville </td>
+								<td>{{ form_widget(form.ville) }}</td>
+							</tr>
+							<tr>
+								<td> Code Postal </td>
+								<td>{{ form_widget(form.code_postal) }}</td>
+							</tr>
+						</tbody>
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary my-3">Mettre à jour</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+
+	</div>
+</div></main>{% endblock %}
