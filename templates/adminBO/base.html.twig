@@ -28,6 +28,9 @@
 		</div>
 	</div>
 </header>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-light text-center" role="alert" style="font-size:100%">{{ message }}</div>
+    {% endfor %} 
         {% block body %}{% endblock %}
 
         {% include 'shared/_footer.html.twig' %}

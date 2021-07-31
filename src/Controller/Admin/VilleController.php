@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Adresse;
 use App\Form\AdresseType;
 use App\Repository\AdresseRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +16,18 @@ class VilleController extends AbstractController
     /**
      * @Route("admin/ville", name="admin_ville")
      */
-    public function index(AdresseRepository $adresse): Response
+    public function index(AdresseRepository $adresse, PaginatorInterface $paginator, Request $request): Response
     {
         $adresses = $adresse->findAll();
+
+        $pagination = $paginator->paginate(
+            $adresses,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('adminBO/ville/index.html.twig', [
-            'controller_name' => 'VilleController',
             'adresses' => $adresses,
+            'pagination'=>$pagination
         ]);
     }
      /**

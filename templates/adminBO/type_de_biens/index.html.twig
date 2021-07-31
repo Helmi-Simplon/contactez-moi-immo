@@ -16,6 +16,7 @@
 <div class="container">
     <h1>TYPES DE BIENS</h1><a class="btn btn-dark" href="{{path('admin_type_de_biens_ajouter')}}">Créer un nouveau type</a>
     <hr>
+    <div>{{ knp_pagination_render(pagination) }} </div>
     <table class="table table-hover table-sm">
   <thead class="text-primary bg-light text-center">
     <tr>
@@ -27,7 +28,7 @@
   </thead>
   
   <tbody class="text-primary bg-light text-center">
-  {% for type in types %}
+  {% for type in pagination %}
     <tr>
       <td>{{ type.id }}</td>
       <td>{{ type.type }}</td>

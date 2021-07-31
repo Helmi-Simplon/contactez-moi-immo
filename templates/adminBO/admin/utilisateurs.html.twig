@@ -40,7 +40,7 @@
     </tr>
   </tfoot>
   <tbody>
-  {% for user in users %}
+  {% for user in pagination %}
     <tr>
       <td>{{ user.id }}</td>
       <td>{{ user.email }}</td>
@@ -67,9 +67,10 @@
       </td>
     </tr>
     {% endfor %}
-
     </tbody>
+  <div>{{ knp_pagination_render(pagination) }} </div>
 </table>
+ <div>{{ knp_pagination_render(pagination) }} </div>
 </div>
  <!-- Modal -->
     <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -88,6 +89,7 @@
             </div>
             </div>
         </div>
+        
     </div>
 {% endblock %}
 {% block javascripts %}

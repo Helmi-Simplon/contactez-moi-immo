@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\TypeBien;
 use App\Form\TypeBienType;
 use App\Repository\TypeBienRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,13 +16,17 @@ class TypeDeBiensController extends AbstractController
     /**
      * @Route("admin/type-de-biens", name="admin_type_de_biens")
      */
-    public function index(TypeBienRepository $typeBienRepository): Response
+    public function index(TypeBienRepository $typeBienRepository,PaginatorInterface $paginator,Request $request): Response
     {
         $types = $typeBienRepository->findAll();
-
+        $pagination = $paginator->paginate(
+            $types,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('adminBO/type_de_biens/index.html.twig', [
-            'controller_name' => 'TypeDeBiensController',
             'types'=>$types,
+            'pagination'=>$pagination,
         ]);
     }
 

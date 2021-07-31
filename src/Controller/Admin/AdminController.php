@@ -11,6 +11,7 @@ use Symfony\Component\Mime\Address;
 use App\Repository\OffresRepository;
 use App\Repository\ContactRepository;
 use App\Repository\DemandesRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -39,11 +40,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/gestion-utilisateurs", name="admin_gestion_utilisateurs")
      */
-    public function gestionUtilisateur(UserRepository $userRepository): Response
+    public function gestionUtilisateur(UserRepository $userRepository,Request $request, PaginatorInterface $paginator): Response
     {
         $users = $userRepository->findAll();
+        $pagination = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('adminBO/admin/utilisateurs.html.twig', [
-            'controller_name' => 'AdminController',
+            'pagination' => $pagination,
             'users' => $users,
         ]);
     }
@@ -93,11 +99,17 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/contact", name="admin_contact")
      */
-    public function adminContact(ContactRepository $contactRepository): Response
+    public function adminContact(ContactRepository $contactRepository,PaginatorInterface $paginator,Request $request): Response
     {
         $contacts = $contactRepository->findAll();
+        $pagination = $paginator->paginate(
+            $contacts,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('adminBO/contact/contact.html.twig', [
-            'contacts' => $contacts
+            'contacts' => $contacts,
+            'pagination' => $pagination
         ]);
     }
 

@@ -16,6 +16,7 @@
 <div class="container">
     <h1>VILLES</h1><a class="btn btn-dark" href="{{path('admin_ville_ajouter')}}">Ajouter une ville</a>
     <hr>
+    <div>{{ knp_pagination_render(pagination) }} </div>
     <table class="table table-hover table-sm">
   <thead class="text-primary bg-light text-center">
     <tr>
@@ -27,7 +28,7 @@
   </thead>
   
   <tbody class="text-primary bg-light text-center">
-  {% for adresse in adresses %}
+  {% for adresse in pagination %}
     <tr>
       <td>{{ adresse.id }}</td>
       <td>{{ adresse.ville }}</td>
