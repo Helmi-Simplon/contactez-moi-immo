@@ -1,0 +1,35 @@
+{% extends 'adminBO/base.html.twig' %}
+
+{% block title %}contactez moi immo admin
+{% endblock %}
+
+{% block body %}
+	<style>
+		.container {
+			background-image: radial-gradient( circle 939px at 94.7% 50%,  rgba(0,178,169,1) 0%, rgba(0,106,101,1) 76.9% );
+            color: wheat;
+		}
+	</style>
+
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-12">
+				<div class="h6 text-light">Destinataire :
+				</div>
+
+				<p>{{ contact.expediteur }}</p>
+			</div>
+			<div class="col-12">
+				<div class="h6 text-light">contenu :
+				</div>
+				<p>{{ contact.contenu}}</p>
+			</div>
+			<div class="col-12 text-light">
+
+					{{form(form)}}
+                    
+
+					</div>
+				</div>
+			</div>
+		{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'adminBO/base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<style>
+    .container { background: #F5F5F5; padding: 2px 6px; }
+     tbody{ font-size:small;}
+    .btn{border-radius:3rem}
+</style>
+
+<div class="container">
+
+    <h1>Backlog Contact</h1>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-light text-center" role="alert" style="font-size:100%">{{ message }}</div>
+{% endfor %} 
+    <hr>
+
+    <table class="table table-hover table-sm">
+                                    <thead class="text-primary bg-light text-center">
+                                        <tr>
+                                            <th class="h5" scope="col">Id</th>
+                                            <th class="h5" scope="col">Expediteur</th>
+                                            <th class="h5" scope="col">Destinataire</th>
+                                            <th class="h5" scope="col">Sujet</th>
+                                            <th class="h5" scope="col">Contenu</th>
+                                            <th class="h5" scope="col">DATE</th>
+                                            <th class="h5" scope="col">Réponse</th>
+                                            <th class="h5" scope="col">Action</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-primary bg-light text-center">
+                                    {% for contact in contacts %}
+                                     <tr>
+                                            <td class="">{{ contact.id}}</td>
+                                            <td class="">{{ contact.expediteur}}</td>
+                                            <td class="">{{ contact.destinataire}}</td>
+                                            <td class="">{{ contact.sujet}}</td>
+                                            <td class="">{{ contact.contenu | u.truncate(15,'...') }}</td>
+                                            <td class="">{{ contact.dateEnvoi | format_datetime ('short','short', locale='fr')}} GMT</td>
+                                            <td class="">{{ contact.reponse | u.truncate(15,'...') }}</td>
+                                            <td><a class="btn btn-sm btn-outline-primary" href="{{ path('admin_contact_reponse',{id:contact.id})}}">Répondre</td>
+                                            
+                                        </tr>
+                                    {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+
+    
+</div>
+{% endblock %}

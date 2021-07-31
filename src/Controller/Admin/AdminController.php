@@ -4,10 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Contact;
+use App\Form\ContactReponseType;
 use App\Repository\UserRepository;
+use Symfony\Component\Mime\Address;
 use App\Repository\OffresRepository;
+use App\Repository\ContactRepository;
 use App\Repository\DemandesRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -82,6 +88,54 @@ class AdminController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès !');
         return $this->redirectToRoute('admin_gestion_utilisateurs');
+    }
+
+    /**
+     * @Route("/admin/contact", name="admin_contact")
+     */
+    public function adminContact(ContactRepository $contactRepository): Response
+    {
+        $contacts = $contactRepository->findAll();
+        return $this->render('adminBO/contact/contact.html.twig', [
+            'contacts' => $contacts
+        ]);
+    }
+
+
+    /**
+     * @Route("/admin/contact/reponse/{id}",name="admin_contact_reponse", requirements={"id"="\d+"})
+     */
+    public function reponseContact(Contact $contact, MailerInterface $mailer, Request $request): Response
+    {
+
+        $form = $this->createForm(ContactReponseType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush();
+            $this->addFlash('success','Message envoyé à ' . $contact->getExpediteur());
+            //dd($contact);
+            $email = (new TemplatedEmail())
+                ->from(new Address('c.helmi@orange.fr', 'contactez-moi-immo.com'))
+                ->to($contact->getExpediteur())
+                ->subject('Contactez-moi-immo.com')
+                ->htmlTemplate('adminBO/contact/recap.html.twig')
+                ->context([
+                    "contact" => $contact,
+
+                ]);
+
+            $mailer->send($email);
+
+            return $this->redirectToRoute('admin_contact');
+        }
+        return $this->render('adminBO/contact/contactForm.html.twig', [
+            'contact' => $contact,
+            'form' => $form->createView()
+        ]);
     }
 
 }

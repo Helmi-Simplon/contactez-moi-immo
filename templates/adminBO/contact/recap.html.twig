@@ -1,0 +1,17 @@
+{% block stylesheets %}
+
+<link rel="stylesheet" href="bootswatch.com/5/lux/bootstrap.min.css">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container ">
+<h3 class="text-info">
+RE: {{ contact.sujet }}
+</h3>
+<p>
+{{ contact.reponse }}
+</p>
+</div>
+{% endblock %}
