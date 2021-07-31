@@ -49,6 +49,8 @@
             text-shadow:1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
 			
         }
+		.page-link{font-size:small}
+	
 	</style>
 {% endblock %}
 {% block titre %}
@@ -62,11 +64,11 @@
 <legend>Vous êtes un acheteur? Déposez votre demande en cliquant sur le bouton ci-dessous :</legend>
 <a type="button" class="btn btn-dark" href="{{path('demande_add')}}">Postez votre demande</a>
 </div>
-		<div class="row space-between">
+		<div class="row">
         
-			{% for demande in demandes %}
+			{% for demande in pagination %}
             
-				<div class="col-md-4 col-lg-5 col-xl-3 col-sm-12 mt-5">
+				<div class="col-md-4 col-lg-5 col-xl-4 col-sm-12 mt-5">
 					<div class="card p-4">
 						<div class="first">
 							<h6 class="heading">{{ demande.titre }}</h6>
@@ -120,6 +122,7 @@
 			{% endfor %}
             
 		</div>
-
+		{# {{ dump(knp_pagination_render(pagination))}} #}
+		<div class="navigation d-flex justify-content-center my-5">{{ knp_pagination_render(pagination) }} </div>
 	</main>
 {% endblock %}

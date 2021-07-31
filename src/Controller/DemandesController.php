@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Demandes;
 use App\Form\DemandesType;
 use App\Repository\DemandesRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,17 +16,20 @@ class DemandesController extends AbstractController
     /**
      * @Route("/demandes", name="demandes")
      */
-    public function index(DemandesRepository $demandesRepository): Response
+    public function index(DemandesRepository $demandesRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $demandes = $demandesRepository->findAllWithAdresses();
         //dd($demandes);
-        
+        $pagination = $paginator->paginate(
+            $demandes,
+            $request->query->getInt('page', 1),
+            9
+        );
    
 
         return $this->render('demandes/index.html.twig', [
-            'controller_name' => 'Demandes',
             'demandes' => $demandes,
-            
+            'pagination' => $pagination,
         ]);
     }
 
@@ -37,7 +41,6 @@ public function detailDemande(Demandes $demande): Response
     {
         //dd($demande);
     return $this->render('demandes/demande_detail.html.twig', [
-        'controller_name' => 'TestController',
         'demande' => $demande,
     ]);
     }

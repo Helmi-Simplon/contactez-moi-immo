@@ -6,6 +6,7 @@ use App\Entity\Images;
 use App\Entity\Offres;
 use App\Form\OffresType;
 use App\Repository\OffresRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,13 +17,19 @@ class OffresController extends AbstractController
     /**
      * @Route("/offres", name="offres")
      */
-    public function index(OffresRepository $offresRepository): Response
+    public function index(OffresRepository $offresRepository,PaginatorInterface $paginator,Request $request): Response
     {
         $offres = $offresRepository -> findAllWithAdressesAndImages();
         //dd($offres);
+        $pagination = $paginator->paginate(
+            $offres,
+            $request->query->getInt('page', 1),
+            8
+        );
         return $this->render('offres/index.html.twig', [
             'controller_name' => 'OffresController',
             'offres' => $offres,
+            'pagination'=>$pagination
         ]);
     }
 
