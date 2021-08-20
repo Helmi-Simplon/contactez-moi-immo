@@ -8,6 +8,7 @@
 		body {
 			background-image: url('{{asset("assets/images/demande1.jpg")}}');
 			background-size: cover;
+			background-attachment: fixed;
 		}
 
 		.btn {
@@ -22,14 +23,18 @@
         }
 	</style>
 {% endblock %}
-{% block titre %}<div class="add-offer"> ...vous êtes acheteur? Tardez pas à déposer votre demande..<br> Let's go!</div>{% endblock %}
+{% block titre %}
+	<div class="add-offer"> 
+		...vous êtes acheteur? Tardez pas à déposer votre demande..<br> 
+		Let's go!
+	</div>
+{% endblock %}
 {% block body %}
 	<main>
-
 		<div class="container d-flex" style="width:38%;">
-        <div class="col">
-			{{ form(form) }}
-		</div>	
+        	<div class="col">
+				{{ form(form) }}
+			</div>	
 		</div>
 
 	</main>
