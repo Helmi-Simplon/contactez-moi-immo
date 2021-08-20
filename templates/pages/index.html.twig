@@ -7,7 +7,11 @@
 
 		body {
 			background-image: url('{{asset("assets/images/accueil.jpg")}}');
-            background-size:cover;
+            background-size:100% 100%;
+            background-attachment: local,scroll;
+            position: fixed; 
+            min-width: 100%;
+            min-height: 100%;
 		}
 
         .titre{
@@ -15,8 +19,19 @@
             text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
 			
         }
+
+        legend{
+            color: lightgray;
+            text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+            margin-top: 200px;
+        }
 	</style>
 {% endblock %}
 {% block body %}
-
+<main>
+    <div class="container text-center">
+        <legend>Publiez votre recherche immobilière en quelques clics</legend>
+        <a type="button" class="btn btn-outline-warning my-2" href="{{path('demande_add')}}">Cliquez ici pour commencer</a>
+    </div>
+</main>
 {% endblock %}
