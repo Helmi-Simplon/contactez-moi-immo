@@ -98,7 +98,7 @@
                                 	{% if is_granted("ROLE_VENDEUR") %}
 									<a class="btn btn-outline-dark btn-sm" href="{{ path('demande_detail', {slug: demande.slug}) }}">>>Voir plus</a>
                                 	{% else %}
-									<button class="btn btn-dark btn-sm" disabled>>>Voir plus</button>
+									<span style="font-size:small;margin-left:5px;">{{ demande.acheteur.numeroTelephone }}</span>
                                 	{% endif %}
 								</div>
 							</div>
@@ -110,11 +110,6 @@
 							<li> {{ adresse.ville }} {{ adresse.codePostal }} </li> 
 						{% endfor %} 
 						</ol>
-						</div>
-						<div class="third mt-4">
-							<button class="btn btn-dark btn-block">
-								Voir Profil
-							</button>
 						</div>
 					</div>
 				</div>
