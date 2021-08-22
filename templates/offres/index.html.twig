@@ -7,16 +7,20 @@
 
 		body {
 			background-image: url('{{asset("assets/images/exterior.jpg")}}');
-            background-size:cover;
+			background-size: cover;
+			background-attachment: fixed;
 		}
 		.card {
-			background-image: url('{{asset("assets/images/textile.jpg")}}');
-            margin-left:10%;
-			width: 350px;
-			height: auto;
-			color: white;
-            border-radius: 50px;
-
+			background-color: #F4D03F;
+			background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,152,155,1) 0.1%, rgba(0,94,120,1) 94.2% );
+			border: 5px solid;
+			max-width: 300px;
+            max-height:auto;
+			border-radius: 10px;
+            color:white;
+			margin-left:10%;
+			margin-right:10%;
+			background-attachment:scroll;
 		}
 
 		.heading {
@@ -39,82 +43,89 @@
 		}
 
 		.line-color {
-			color: green;
+			color: white;
 			height: 3px;
 		}
 		legend {
 			color: white;
-            text-shadow:1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
+			text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
 		}
-		.page-link{font-size:small}
+		.page-link {
+			font-size: small
+		}
 	</style>
 {% endblock %}
 {% block titre %}
 	<span style="text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;">...vous cherchez un bien immobilier? et qui répond à vos attentes?<br>
-	vous êtes au bon endroit!</span>
+		vous êtes au bon endroit!</span>
 {% endblock %}
 {% block body %}
-<main>
-	<div class='container text-center'>
-		<legend>Vous êtes un vendeur? Déposez votre offre en cliquant sur le bouton ci-dessous :</legend>
-		<a type="button" class="btn btn-dark" href="{{path('offre_add')}}">Postez votre offre</a>
-	</div>
-	<div class="row">
-		{% for offre in pagination %}
-			<div class="col-xl-4 col-lg-6 col-md-8 col-sm-12 mt-5">
+	<main>
+		<div class='container text-center'>
+			<legend>Vous êtes un vendeur? Déposez votre offre en cliquant sur le bouton ci-dessous :</legend>
+			<a type="button" class="btn btn-dark" href="{{path('offre_add')}}">Postez votre offre</a>
+		</div>
+		<div class="row">
+			{% for offre in pagination %}
+				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mt-5">
 					<div class="card p-4">
 						<div class="first">
 							<h6 class="heading">{{ offre.titre }}</h6>
-		<div class="time d-flex flex-row align-items-center justify-content-between mt-3">
+							<div class="time d-flex flex-row align-items-center justify-content-between mt-3">
 								<div class="d-flex align-items-center">
 									<span class="hour ml-1">{{ offre.dateOffre | ago }}</span>
 								</div>
 								<div>
-									<span class="font-weight-bold">{{ offre.prix }} €</span>
+									<span class="font-weight-bold">{{ offre.prix }}
+										€</span>
 								</div>
 							</div>
 						</div>
+						<hr>
 						<div class="second d-flex flex-row mt-2">
-                       
+
 							<div class="image mr-3">
-                            
-						{% for image in offre.vendeur.image %}
-                        <img  src="{{ asset('assets/images/' ~ image.urlImage ) }}" class="" width="60" />
-                          {% endfor %}
-                            
-                            
+
+								{% for image in offre.vendeur.image %}
+									<img src="{{ asset('assets/images/' ~ image.urlImage ) }}" class="rounded-circle" width="100"/>
+								{% endfor %}
+
+
 							</div>
-                        
-							<div class="">
+
+							<div>
 								<div class="d-flex flex-row mb-1">
-									<span>{{ offre.vendeur.prenom }} {{ offre.vendeur.nom }}</span>
+									<span>{{ offre.vendeur.prenom }}
+										{{ offre.vendeur.nom }}</span>
 								</div>
 								<div class="ml-5">
-                                {% if is_granted("ROLE_ACHETEUR") %}
-                               
-                              
-									<a class="btn btn-outline-dark btn-sm" href="{{ path('offre_detail', {slug: offre.slug}) }}">>>Voir plus</a>
+									{% if is_granted("ROLE_ACHETEUR") %}
 
-                                {% else %}
-                               
-                              
-									<button class="btn btn-dark btn-sm" disabled>>>Voir plus</button>
-                                {% endif %}
+
+										<a class="btn btn-outline-dark btn-sm" href="{{ path('offre_detail', {slug: offre.slug}) }}">>>Voir plus</a>
+
+									{% elseif app.user %}
+
+
+										<span style="font-size:small;margin-left:5px;">Tél:{{ offre.vendeur.numeroTelephone }}</span>
+									{% endif %}
 								</div>
 							</div>
 						</div>
 						<hr class="line-color">
 						<p class="text-left">Zone de recherche :
-						<li> {{ offre.adresse.ville }} {{ offre.adresse.codePostal }} </li></p>
-						<div class="third mt-4">
-							<button class="btn btn-dark btn-block">
-								Voir Profil</button>
-						</div>
+							<li>
+								{{ offre.adresse.ville }}
+								{{ offre.adresse.codePostal }}
+							</li>
+						</p>
+
 					</div>
 				</div>
 			{% endfor %}
-            
+
 		</div>
-		<div class="navigation d-flex justify-content-center my-5">{{ knp_pagination_render(pagination) }} </div>
-    </main>
+		<div class="navigation d-flex justify-content-center my-5">{{ knp_pagination_render(pagination) }}
+		</div>
+	</main>
 {% endblock %}

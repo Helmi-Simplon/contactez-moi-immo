@@ -6,7 +6,7 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/accueil.jpg")}}');
+			background-image: url('{{asset("assets/images/city.jpg")}}');
             background-size:100% 100%;
             background-attachment: local,scroll;
             position: fixed; 
@@ -30,8 +30,18 @@
 {% block body %}
 <main>
     <div class="container text-center">
+        {% if not app.user %}
+        <legend>Afin de publier votre recherche ou votre offre immobilière<br>
+        Inscrivez-vous gratuitement en quelques clics</legend>
+        <br>
+        <a type="button" class="btn btn-outline-warning my-2" href="{{path('app_register')}}">Cliquez ici pour commencer</a>
+        {% elseif is_granted("ROLE_VENDEUR") %}
+        <legend>Publiez votre offre immobilière en quelques clics</legend>
+        <a type="button" class="btn btn-outline-warning my-2" href="{{path('offre_add')}}">Cliquez ici pour commencer</a>
+        {% else %}
         <legend>Publiez votre recherche immobilière en quelques clics</legend>
         <a type="button" class="btn btn-outline-warning my-2" href="{{path('demande_add')}}">Cliquez ici pour commencer</a>
+        {% endif %}
     </div>
 </main>
 {% endblock %}

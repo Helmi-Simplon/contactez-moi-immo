@@ -12,10 +12,11 @@
 
 		}
 		.card {
-			background-image: url('{{asset("assets/images/textile.jpg")}}');
+			background-image: linear-gradient( 89.4deg,  rgba(194,0,39,1) 0.8%, rgba(10,35,104,1) 99.4% );
+			border: 5px solid gray;
 			max-width: 300px;
             max-height:auto;
-			border-radius: 50px;
+			border-radius: 10px;
             color:white;
 			margin-left:10%;
 			margin-right:10%;
@@ -42,7 +43,7 @@
 		}
 
 		.line-color {
-			color: green;
+			color: white;
 			height: 3px;
 		}
         legend{
@@ -50,7 +51,9 @@
             text-shadow:1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
 			
         }
-		.page-link{font-size:small}
+		.page-link{
+			font-size:small
+		}
 	
 	</style>
 {% endblock %}
@@ -71,7 +74,7 @@
 		</div>
 		<div class="row">
 			{% for demande in pagination %}
-				<div class="col-md-4 col-lg-5 col-xl-4 col-sm-12 mt-5">
+				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mt-5">
 					<div class="card p-4">
 						<div class="first">
 							<h6 class="heading">{{ demande.titre }}</h6>

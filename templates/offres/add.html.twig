@@ -8,6 +8,7 @@
 		body {
 			background-image: url('{{asset("assets/images/city.jpg")}}');
             background-size:cover;
+            background-attachment: fixed;
 		}
 		
         main{
@@ -29,16 +30,19 @@
 
 	</style>
 {% endblock %}
-{% block titre %}<div class="add-offer"> ...vous êtes vendeur? Ne tardez pas à déposer votre offre..<br> Let's go!</div>{% endblock %}
+{% block titre %}
+    <div class="add-offer">
+        ...vous êtes vendeur? Ne tardez pas à déposer votre offre..<br>
+        Let's go!
+    </div>
+{% endblock %}
 {% block body %}
-	<main class="add-offer">
-
-		<div class="container">
-        <div class="wraper">
+    <main class="add-offer">
+        <div class="container d-flex" style="width:38%;">
+            <div class="col">
 			{{ form(form) }}
 			
-		</div>
+		    </div>
         </div>
-
-	</main>
+    </main>
 {% endblock %}
