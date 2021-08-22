@@ -2,56 +2,58 @@
 
 {% block title %}CONTACTEZ MOI IMMO ESPACE ACHETEUR
 {% endblock %}
-{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+{% block titre %}MON ESPACE ACHETEUR
+{% endblock %}
 
 {% block body %}
-		<main>
-			<div class="container">
+	<main>
+		<div class="container">
 
-				<table class="table table-hover">
-					<legend>INFOS PROFIL</legend>
-					<hr>
+			<table class="table table-hover">
+				<h4 class="text-secondary">INFOS PROFIL</h4>
+				<hr>
 
-					<tbody>
-						<tr class="table-active">
-							<th scope="row">
-								<h5>COURRIEL</h5>
-							</th>
-							<td class="text-secondary">{{ app.user.email }}</td>
-						</tr>
-						<tr class="table-active">
-							<th scope="row">
-								<h5>PRENOM</h5>
-							</th>
-							<td class="text-secondary">{{ app.user.prenom }}</td>
-						</tr>
-						<tr class="table-active">
-							<th scope="row">
-								<h5>NOM</h5>
-							</th>
-							<td class="text-secondary">{{ app.user.nom }}</td>
-						</tr>
-						<tr class="table-active">
-							<th scope="row">
-								<h5>TELEPHONE</h5>
-							</th>
-							<td class="text-secondary">{{ app.user.numeroTelephone }}</td>
-						</tr>
-						<tr class="table-active">
+				<tbody>
+					<tr class="table-active">
 						<th scope="row">
-								<h5>STATUS</h5>
+							<h6>COURRIEL</h6>
+						</th>
+						<td class="text-secondary">{{ app.user.email }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<h6>PRENOM</h6>
+						</th>
+						<td class="text-secondary">{{ app.user.prenom }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<h6>NOM</h6>
+						</th>
+						<td class="text-secondary">{{ app.user.nom }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<h6>TELEPHONE</h6>
+						</th>
+						<td class="text-secondary">{{ app.user.numeroTelephone }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<h6>STATUS</h6>
 						</th>
 						{% if app.user.actif == 1 %}
-							<td class="text-secondary">Actif</td>
+							<td class="text-sucess">Actif</td>
 						{% else %}
-						<td class="text-secondary">	Inactif</td>
+							<td class="text-danger">
+								Inactif</td>
 						{% endif %}
-						</tr>
+					</tr>
 
-					</tbody>
-				</table>
+				</tbody>
+			</table>
 
-			</div>
-		</main>
-	
+		</div>
+	</main>
+
 {% endblock %}

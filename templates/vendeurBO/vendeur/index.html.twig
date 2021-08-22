@@ -2,56 +2,58 @@
 
 {% block title %}CONTACTEZ MOI IMMO ESPACE VENDEUR
 {% endblock %}
-{% block titre %}MON ESPACE VENDEUR{% endblock %}
+{% block titre %}MON ESPACE VENDEUR
+{% endblock %}
 
 {% block body %}
-		<main>
-			<div class="container">
+	<main>
+		<div class="container">
 
-				<table class="table table-hover table-dark">
-					<h4 class="text-secondary">INFOS PROFIL</h4>
-					<hr>
+			<table class="table table-hover">
+				<h4 class="text-secondary">INFOS PROFIL</h4>
+				<hr>
 
-					<tbody>
-						<tr class="table-active">
-							<th scope="row">
-								<div class="text-warning h6">COURRIEL</div>
-							</th>
-							<td class="text-light">{{ app.user.email }}</td>
-						</tr>
-						<tr class="table-active">
-							<th scope="row">
-								<div class="text-warning h6">PRENOM</div>
-							</th>
-							<td class="text-light">{{ app.user.prenom }}</td>
-						</tr>
-						<tr class="table-active">
-							<th scope="row">
-								<div class="text-warning h6">NOM</div>
-							</th>
-							<td class="text-light">{{ app.user.nom }}</td>
-						</tr>
-						<tr class="table-active">
-							<th scope="row">
-								<div class="text-warning h6">TELEPHONE</div>
-							</th>
-							<td class="text-light">{{ app.user.numeroTelephone }}</td>
-						</tr>
-						<tr class="table-active">
+				<tbody>
+					<tr class="table-active">
 						<th scope="row">
-								<div class="text-warning h6">STATUS</div>
+							<div class="h6">COURRIEL</div>
+						</th>
+						<td class="text-secondary">{{ app.user.email }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<div class="h6">PRENOM</div>
+						</th>
+						<td class="text-secondary">{{ app.user.prenom }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<div class="h6">NOM</div>
+						</th>
+						<td class="text-secondary">{{ app.user.nom }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<div class="h6">TELEPHONE</div>
+						</th>
+						<td class="text-secondary">{{ app.user.numeroTelephone }}</td>
+					</tr>
+					<tr class="table-active">
+						<th scope="row">
+							<div class="text h6">STATUS</div>
 						</th>
 						{% if app.user.actif == 1 %}
 							<td class="text-success">Actif</td>
 						{% else %}
-						<td class="text-danger">	Inactif</td>
+							<td class="text-danger">
+								Inactif</td>
 						{% endif %}
-						</tr>
+					</tr>
 
-					</tbody>
-				</table>
+				</tbody>
+			</table>
 
-			</div>
-		</main>
-	
+		</div>
+	</main>
+
 {% endblock %}
