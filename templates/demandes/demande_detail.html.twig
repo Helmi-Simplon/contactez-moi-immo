@@ -72,7 +72,7 @@
 				<hr>
 				<div>
 				{% for acheteurs in demande.acheteur.image %}
-					<img src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200"/>
+					<img src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200" style="border:2px solid wheat"/>
 				{% endfor %}
 				<br>
 				{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}
