@@ -6,7 +6,7 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/demande1.jpg")}}');
+			background-image: url('{{asset("assets/images/table.jpg")}}');
 			background-size: cover;
 			background-attachment: fixed;
 		}
@@ -19,23 +19,130 @@
 
 		.add-offer{
             color:white;
-            text-shadow:1px 1px 2px black, 0 0 1em gray, 0 0 0.2em white;
+            text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
         }
+		label{
+			color: white;
+			text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;
+		}
+		.hidden{
+			display:none;
+		}
+		#demandes_typebien{
+			display: flex;
+		}
+		.form-check-label{
+			color:wheat;
+		}
+		#demandes_titre:focus{
+			background:transparent;
+			focus:black;
+		}
+		#demandes_adresses{
+			background:transparent;
+			color:black;
+			cursor: pointer;
+		}
+		
 	</style>
 {% endblock %}
-{% block titre %}
-	<div class="add-offer"> 
-		...vous êtes acheteur? Tardez pas à déposer votre demande..<br> 
-		Let's go!
-	</div>
-{% endblock %}
+{% block titre %}<div class="add-offer"> ...vous êtes acheteur? Ne tardez pas à déposer votre demande..<br> Let's go!</div>{% endblock %}
 {% block body %}
 	<main>
-		<div class="container d-flex" style="width:38%;">
-        	<div class="col">
-				{{ form(form) }}
+
+		<div class="container d-flex" style="padding-left:10px;width:fit-content;">
+        	<div class="card" style="padding-left:10px;padding-right:10px;background:transparent;">
+				{{ form_start(form) }}
+
+					<label>Titre</label>
+					{{ form_widget(form.titre)}}
+					<label>Type de biens</label>	
+					{{ form_widget(form.typebien)}}
+					<label>Superficie en m²</label>
+					&nbsp;<label id="result">0 m²</label>
+					{{ form_widget(form.superficie)}}
+					<div id="app">
+					<label>Nombre de pièces</label>
+					&nbsp;<label id="result1">0</label>
+					{{ form_widget(form.nbre_pieces)}}
+					</div>
+					<div id="imm">
+					<label>Nombre d'appartements</label>
+					&nbsp;<label id="result2">0</label>
+					{{ form_widget(form.nbre_appartements)}}
+
+					<label>Nombre de studios</label>
+					&nbsp;<label id="result3">0</label>
+					{{ form_widget(form.nbre_studios)}}
+					</div>
+					<div id="terr">
+					<label>Places de parking</label>
+					&nbsp;<label id="result4">0</label>
+					{{ form_widget(form.nbre_parking)}}
+					<label>Cave</label>
+					&nbsp;<label id="result5">0</label>
+					{{ form_widget(form.cave)}}
+					</div>
+					<label>Budget</label>
+					&nbsp;<label id="result6">0€</label>
+					{{ form_widget(form.budget)}}
+					<label>Description</label>
+					{{ form_widget(form.description)}}
+					<label>Zone de recherche</label>
+					{{ form_widget(form.adresses)}}
+					<div class="text-center mt-2">
+					
+					{{ form_widget(form.Valider)}}
+					</div>
+				{{ form_end(form) }}
+
 			</div>	
 		</div>
 
 	</main>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {	
+            let typebiens = document.querySelectorAll(".form-check-input");
+			let app = document.querySelector("#app");
+			let imm = document.querySelector("#imm");
+			let terr = document.querySelector("#terr");
+	 		for(let typebien of typebiens){
+				typebien.addEventListener('click', function(){
+					if(document.getElementById("demandes_typebien_3").checked){
+	 					app.className = "hidden";
+						imm.className = "";
+					}else if(document.getElementById("demandes_typebien_5").checked || document.getElementById("demandes_typebien_6").checked){
+						app.className = "hidden";
+						imm.className = "hidden";
+						terr.className= "hidden";
+					}else{
+						app.className = "";
+						terr.className= "";
+	 					imm.className = "hidden";
+	 				}	
+	 			})
+			}
+
+			displayRange("#result","#demandes_superficie");
+			displayRange("#result1","#demandes_nbre_pieces");
+			displayRange("#result2","#demandes_nbre_appartements");
+			displayRange("#result3","#demandes_nbre_studios");
+			displayRange("#result4","#demandes_nbre_parking");
+			displayRange("#result5","#demandes_cave");
+			displayRange("#result6","#demandes_budget");			
+	 	}
+
+		function displayRange(id1,id2){
+			let results = document.querySelector(id1);
+			let ranges = document.querySelectorAll(id2);
+			for(let range of ranges){
+ 				range.addEventListener("input", function(){
+					results.innerHTML = range.value;
+			 	})
+			}
+		}
+    </script>
 {% endblock %}
