@@ -78,6 +78,7 @@ class VendeurOffresController extends AbstractController
         }
         return $this->render('vendeurBO/vendeur_offres/maj_offre.html.twig', [
             'form' => $form->createView(),
+            'offres' => $offres,
            
         ]);
     }
