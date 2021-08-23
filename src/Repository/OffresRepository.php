@@ -55,6 +55,9 @@ class OffresRepository extends ServiceEntityRepository
             ->leftjoin('o.adresse','a')
             ->leftjoin('o.vendeur','u')
             ->leftjoin('o.image','i')
+            ->andWhere('o.actif = :actif')
+            ->setParameter('actif', true)
+            ->orderBy('o.date_offre', 'DESC')
             ->getQuery()
             ->getResult()
         ;
