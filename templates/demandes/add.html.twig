@@ -59,33 +59,33 @@
 					<label>Type de biens</label>	
 					{{ form_widget(form.typebien)}}
 					<label>Superficie en m²</label>
-					&nbsp;<label id="result">0 m²</label>
-					{{ form_widget(form.superficie)}}
+					&nbsp;<label id="result">0</label>
+					{{ form_widget(form.superficie,{'attr':{'value':0}})}}
 					<div id="app">
 					<label>Nombre de pièces</label>
 					&nbsp;<label id="result1">0</label>
-					{{ form_widget(form.nbre_pieces)}}
+					{{ form_widget(form.nbre_pieces,{'attr':{'value':0}})}}
 					</div>
 					<div id="imm">
 					<label>Nombre d'appartements</label>
 					&nbsp;<label id="result2">0</label>
-					{{ form_widget(form.nbre_appartements)}}
+					{{ form_widget(form.nbre_appartements,{'attr':{'value':0}})}}
 
 					<label>Nombre de studios</label>
 					&nbsp;<label id="result3">0</label>
-					{{ form_widget(form.nbre_studios)}}
+					{{ form_widget(form.nbre_studios,{'attr':{'value':0}})}}
 					</div>
 					<div id="terr">
 					<label>Places de parking</label>
 					&nbsp;<label id="result4">0</label>
-					{{ form_widget(form.nbre_parking)}}
+					{{ form_widget(form.nbre_parking,{'attr':{'value':0}})}}
 					<label>Cave</label>
 					&nbsp;<label id="result5">0</label>
-					{{ form_widget(form.cave)}}
+					{{ form_widget(form.cave,{'attr':{'value':0}})}}
 					</div>
-					<label>Budget</label>
-					&nbsp;<label id="result6">0€</label>
-					{{ form_widget(form.budget)}}
+					<label>Budget en €</label>
+					&nbsp;<label id="result6">0</label>
+					{{ form_widget(form.budget,{'attr':{'value':0}})}}
 					<label>Description</label>
 					{{ form_widget(form.description)}}
 					<label>Zone de recherche</label>

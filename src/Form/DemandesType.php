@@ -27,8 +27,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 500,
                     'step'=> 1,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('nbre_pieces',RangeType::class, [
@@ -36,8 +34,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 10,
                     'step'=> 1,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('nbre_appartements',RangeType::class, [
@@ -45,8 +41,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 20,
                     'step'=> 1,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('nbre_studios',RangeType::class, [
@@ -54,8 +48,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 20,
                     'step'=> 1,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('nbre_parking',RangeType::class, [
@@ -63,8 +55,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 20,
                     'step'=> 1,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('cave',RangeType::class, [
@@ -72,8 +62,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 20,
                     'step'=> 1,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('budget',RangeType::class, [
@@ -81,8 +69,6 @@ class DemandesType extends AbstractType
                     'min' => 0,
                     'max' => 2000000,
                     'step'=> 5000,
-                    'value'=> 0,
-
                 ] 
             ])
             ->add('description',TextareaType::class)
