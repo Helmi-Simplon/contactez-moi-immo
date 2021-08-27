@@ -59,6 +59,7 @@ return $this->render('offres/offre_detail.html.twig', [
         if ($form->isSubmitted() && $form->isValid()) {
 
             $offres->setVendeur($this->getUser());
+            $offres->setActif(1);
             $images = $form->get('image')->getData();
             foreach($images as $image){
                 // On génère un nouveau nom de fichier

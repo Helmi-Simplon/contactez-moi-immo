@@ -4,64 +4,64 @@
 {% endblock %}
 
 {% block stylesheets %}
-<style>
-.hidden{
-	display:none;
-}
-</style>
+	<style>
+		.hidden {
+			display: none;
+		}
+	</style>
 {% endblock %}
-{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+{% block titre %}MON ESPACE ACHETEUR
+{% endblock %}
 
 {% block body %}
-		<main>
-		<h4 class="text-secondary">METTRE A JOUR MON COMPTE</h4>
-					<hr>
-{% if app.request.pathInfo is same as path("acheteur_profil_update",{id:app.user.id}) %}
+	<main>
+		<div class="container">
+			<h4 class="text-secondary">METTRE A JOUR MON COMPTE</h4>
+			<hr>
+			{% if app.request.pathInfo is same as path("acheteur_profil_update",{id:app.user.id}) %}
 
-			<div class="container">
-    <div class="row">
-        {{ form_start(form) }}
-        <table>
-            <tbody>
-            <tr>
-                <th>COURRIEL:</th>
-                <td>{{ form_widget(form.email) }}</td>
-            </tr>
-            <tr>
-                <th>PRENOM:</th>
-                <td>{{ form_widget(form.prenom) }}</td>
-            </tr>
-            <tr>
-                <th>NOM:</th>
-                <td>{{ form_widget(form.nom) }}</td>
-            </tr>
-			<tr>
-                <th>TELEPHONE:</th>
-                <td>{{ form_widget(form.numero_telephone) }}</td>
-            </tr>
-			<tr class="hidden">
-                <th>Activation:</th>
-                <td>{{ form_widget(form.actif) }}</td>
-            </tr>
-            <tr>
-                <th>ROLE:</th>
-                <td>{{ form_widget(form.roles) }}</td>
-            </tr>
-			
-            </tr>
-            </tbody>
-        </table>
-		<div class="text-center">
-        <button type="submit" class="btn btn-primary my-3">Sauvegarder</button>
-        </div>
-        {{ form_end(form) }}
-    </div>
-	
-</div>
-{% else %}
-<div class="text-center text-danger h4">Action refusée, merci de cliquer sur le lien ""Mettre à jour mon compte" pour faire les modifications souhaitées.</div>
-{% endif %}	
-		</main>
+				<div class="container">
+					<div class="row">
+						{{ form_start(form) }}
+						<table>
+							<tbody>
+								<tr>
+									<th>COURRIEL:</th>
+									<td>{{ form_widget(form.email) }}</td>
+								</tr>
+								<tr>
+									<th>PRENOM:</th>
+									<td>{{ form_widget(form.prenom) }}</td>
+								</tr>
+								<tr>
+									<th>NOM:</th>
+									<td>{{ form_widget(form.nom) }}</td>
+								</tr>
+								<tr>
+									<th>TELEPHONE:</th>
+									<td>{{ form_widget(form.numero_telephone) }}</td>
+								</tr>
+								<tr class="hidden">
+									<th>Activation:</th>
+									<td>{{ form_widget(form.actif) }}</td>
+								</tr>
+								<tr>
+									<th>ROLE:</th>
+									<td>{{ form_widget(form.roles) }}</td>
+								</tr>
+							</tbody>
 
+						</table>
+						<div class="text-center">
+							<button type="submit" class="btn btn-primary my-3">Sauvegarder</button>
+						</div>
+						{{ form_end(form) }}
+					</div>
 
+				</div>
+			{% else %}
+				<div class="text-center text-danger h4">Action refusée, merci de cliquer sur le lien ""Mettre à jour mon compte" pour faire les modifications souhaitées.</div>
+			{% endif %}
+		</div>
+	</main>
 {% endblock %}
