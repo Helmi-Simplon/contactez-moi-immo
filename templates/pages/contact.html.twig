@@ -10,8 +10,9 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/textile.jpg")}}');
+			background-image: url('{{asset("assets/images/card.jpg")}}');
 			background-size: cover;
+			background-attachment: fixed;
 		}
 
 		.titre {
@@ -25,9 +26,14 @@
 	<div class="container">
 		<div class="d-flex text-light justify-content-center my-5">
 			{{ form_start(form) }}
-
-			    {{form(form)}}
-
+				<label>Expéditeur</label>
+				{{form_widget(form.expediteur)}}
+				<label>Sujet</label>
+				{{form_widget(form.sujet)}}
+			    {{form_row(form.contenu | raw)}}
+				<div class="text-center">
+				{{form_row(form.Envoyer)}}
+				</div>
 			{{ form_end(form) }}
 		</div>
 	</div>
