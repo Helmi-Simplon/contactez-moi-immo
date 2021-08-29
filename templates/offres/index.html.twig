@@ -6,7 +6,7 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/exterior.jpg")}}');
+			background-image: url('{{asset("assets/images/profil/exterior.jpg")}}');
 			background-size: cover;
 			background-attachment: fixed;
 		}
@@ -87,7 +87,7 @@
 							<div class="image mr-3">
 
 								{% for image in offre.vendeur.image %}
-									<img src="{{ asset('assets/images/' ~ image.urlImage ) }}" class="rounded-circle" width="100" style="border:2px solid white"/>
+									<img src="{{ asset('assets/images/profil/' ~ image.urlImage ) }}" class="rounded-circle" width="100" style="border:2px solid white"/>
 								{% endfor %}
 
 

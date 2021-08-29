@@ -2,6 +2,7 @@
 
 namespace App\Controller\vendeur;
 
+use App\Entity\Images;
 use App\Entity\Offres;
 use App\Form\OffresType;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class VendeurOffresController extends AbstractController
     public function index(Offres $offres): Response
     {
         return $this->render('vendeurBO/vendeur_offres/index.html.twig', [
+            
             'offres' => $offres,
         ]);
     }
@@ -34,6 +36,25 @@ class VendeurOffresController extends AbstractController
 
             $offres->setVendeur($this->getUser());
             $offres->setActif(true);
+            // On récupère les images transmises
+            $images = $form->get('image')->getData();
+    
+            // On boucle sur les images
+            foreach($images as $image){
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+        
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+                );
+        
+                // On crée l'image dans la base de données
+                $image = new Images();
+                $image->setUrlImage($fichier);
+                $offres->addImage($image);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($offres);
             $em->flush();
@@ -66,6 +87,25 @@ class VendeurOffresController extends AbstractController
        $form = $this->createForm(OffresType::class, $offres);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // On récupère les images transmises
+            $images = $form->get('image')->getData();
+    
+            // On boucle sur les images
+            foreach($images as $image){
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+        
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+                );
+        
+                // On crée l'image dans la base de données
+                $img = new Images();
+                $img->setUrlImage($fichier);
+                $offres->addImage($img);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($offres);
             $em->flush();

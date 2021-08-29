@@ -6,7 +6,7 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/house.jpg")}}');
+			background-image: url('{{asset("assets/images/profil/house.jpg")}}');
 			background-size:cover;
 			background-attachment: fixed;
 		}
@@ -72,7 +72,7 @@
 				<hr>
 				<div>
 				{% for acheteurs in demande.acheteur.image %}
-					<img src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200" style="border:2px solid wheat"/>
+					<img src="{{ asset('assets/images/profil/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200" style="border:2px solid wheat"/>
 				{% endfor %}
 				<br>
 				{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}

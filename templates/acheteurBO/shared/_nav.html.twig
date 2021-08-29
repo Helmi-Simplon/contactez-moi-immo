@@ -24,13 +24,13 @@
 				<ul>
 					<li class="list-item ">Gérer mes demandes</li>
 					<li class="list">
-						<a href="{{ path('acheteurdemandes',{acheteur:app.user.id})}}">Voir mes demandes</a>
+						<a {% for demande in app.user.demande %}{% if demande.acheteur %} href="{{ path('acheteurdemandes',{acheteur:app.user.id})}}" {% endif %} {% endfor %}>Voir mes demandes</a>
 					</li>
 					<li class="list">
 						<a href="{{path('acheteurdemandes_add')}}">Déposer une demande</a>
 					</li>
 					<li class="list">
-						<a href="{{ path('acheteur_demandes_bo',{acheteur:app.user.id})}}">Mettre à jour/Supprimer mes demandes</a>
+						<a {% for demande in app.user.demande %}{% if demande.acheteur %} href="{{ path('acheteur_demandes_bo',{acheteur:app.user.id})}}" {% endif %} {% endfor %}>Mettre à jour/Supprimer mes demandes</a>
 					</li>
 				</ul>
 				<li class="list-item">

@@ -3,6 +3,7 @@
 namespace App\Controller\acheteur;
 
 use App\Entity\User;
+use App\Entity\Images;
 use App\Form\MajProfilType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,12 +25,30 @@ class AcheteurController extends AbstractController
      /**
      * @Route("/acheteur/profil/update/{id}", name="acheteur_profil_update", requirements={"id"="\d+"})
      */
-    public function updateAcheteur(User $user, Request $request): Response
+    public function updateAcheteur(User $user,Images $images, Request $request): Response
     {
         $form = $this->createForm(MajProfilType::class, $user);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            // On récupère les images transmises
+            $imgs = $form->get('image')->getData();
+    
+            // On boucle sur les images
+            foreach($imgs as $image){
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+        
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                $this->getParameter('image_directory'),
+                $fichier
+                );
+        
+                // On crée l'image dans la base de données
+                $images->setUrlImage($fichier);
+                $user->addImage($images);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -39,6 +58,7 @@ class AcheteurController extends AbstractController
         
         return $this->render('acheteurBO/acheteur/update.html.twig', [
             'form' => $form->createView(),
+            'user'=> $user,
         ]);
     }
 

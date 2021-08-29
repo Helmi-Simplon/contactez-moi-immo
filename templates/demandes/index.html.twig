@@ -6,7 +6,7 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/villa.jpg")}}');
+			background-image: url('{{asset("assets/images/profil/villa.jpg")}}');
 			background-size:cover;
 			background-attachment: fixed;
 
@@ -90,7 +90,7 @@
 						<div class="second d-flex flex-row mt-2">
 							<div class="image mr-3">  
 								{% for acheteurs in demande.acheteur.image %}
-                        		<img  src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="100" style="border:2px solid wheat"/>
+                        		<img  src="{{ asset('assets/images/profil/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="100" style="border:2px solid wheat"/>
                           		{% endfor %}
 							</div>
 							<div>
@@ -108,11 +108,11 @@
 						</div>
 						<hr class="line-color">
 						<div class="text-left">Zone de recherche :
-						<ol>
+						<ul>
 						{% for adresse in demande.adresses %} 
 							<li> {{ adresse.ville }} {{ adresse.codePostal }} </li> 
 						{% endfor %} 
-						</ol>
+						</ul>
 						</div>
 					</div>
 				</div>

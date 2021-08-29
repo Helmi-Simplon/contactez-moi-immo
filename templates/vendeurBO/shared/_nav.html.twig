@@ -21,21 +21,24 @@
 					{% endif %}
 					</li>
 				</ul>
-				<ul>
+				
+				<ul>				
+				
 					<li class="list-item ">Gérer mes offres</li>
 					<li class="list">
-						<a href="{{path('vendeur_offres',{vendeur:app.user.id})}}">Voir mes offres</a>
+						<a {% for offre in app.user.offre %}{% if offre.vendeur %} href="{{path('vendeur_offres',{vendeur:app.user.id})}}" {% endif %} {% endfor %}>Voir mes offres</a>
 					</li>
 					<li class="list">
 						<a href="{{path('vendeur_offres_add')}}">Déposer une offre</a>
 					</li>
 					<li class="list">
-						<a href="{{ path('vendeur_offres_actions', {vendeur:app.user.id})}}">Mettre à jour/Supprimer mes offres</a>
+						<a {% for offre in app.user.offre %}{% if offre.vendeur %} href="{{ path('vendeur_offres_actions', {vendeur:app.user.id} )}}" {% endif %} {% endfor %}>Mettre à jour/Supprimer mes offres</a>
 					</li>
 				</ul>
 				<li class="list-item">
 					<a class="nav-link text-warning" href="{{ path('home')}}">Quitter</a>
 				</li>
-
 			</ul>
+			
+			
 		</nav>
