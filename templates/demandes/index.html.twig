@@ -6,19 +6,21 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/villa.jpg")}}');
+			background-image: url('{{asset("assets/images/profil/villa.jpg")}}');
 			background-size:cover;
+			background-attachment: fixed;
 
 		}
 		.card {
-			background-image: url('{{asset("assets/images/textile.jpg")}}');
-			width: 350px;
-            height:auto;
-			border-radius: 50px;
+			background-image: linear-gradient( 112.1deg,  rgba(32,38,57,1) 11.4%, rgba(63,76,119,1) 70.2% );
+			border: 5px solid gray;
+			max-width: 300px;
+            max-height:auto;
+			border-radius: 10px;
             color:white;
 			margin-left:10%;
-			
-		
+			margin-right:10%;
+			background-attachment:scroll;
 		}
 
 		.heading {
@@ -41,7 +43,7 @@
 		}
 
 		.line-color {
-			color: green;
+			color: white;
 			height: 3px;
 		}
         legend{
@@ -49,26 +51,30 @@
             text-shadow:1px 1px 2px black, 0 0 1em white, 0 0 0.2em white;
 			
         }
-		.page-link{font-size:small}
+		.page-link{
+			font-size:small
+		}
 	
 	</style>
 {% endblock %}
 {% block titre %}
-<span style="text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;"> ...vous avez un bien immobilier à vendre? et qui répond à mes attentes?<br> contactez-moi asap!
-</span>
+	<span style="text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;"> 
+		...vous avez un bien immobilier à vendre? et qui répond à mes attentes?<br> 
+		contactez-moi asap!
+	</span>
 {% endblock %}
 
 {% block body %}
 	<main>
-    <div class='container text-center'>
-<legend>Vous êtes un acheteur? Déposez votre demande en cliquant sur le bouton ci-dessous :</legend>
-<a type="button" class="btn btn-dark" href="{{path('demande_add')}}">Postez votre demande</a>
-</div>
+    	<div class='container text-center'>
+			<legend>
+				Vous êtes un acheteur? Déposez votre demande en cliquant sur le bouton ci-dessous :
+			</legend>
+			<a type="button" class="btn btn-dark" href="{{path('demande_add')}}">Postez votre demande</a>
+		</div>
 		<div class="row">
-        
 			{% for demande in pagination %}
-            
-				<div class="col-md-4 col-lg-5 col-xl-4 col-sm-12 mt-5">
+				<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mt-5">
 					<div class="card p-4">
 						<div class="first">
 							<h6 class="heading">{{ demande.titre }}</h6>
@@ -82,40 +88,31 @@
 							</div>
 						</div>
 						<div class="second d-flex flex-row mt-2">
-                       
-							<div class="image mr-3">
-                            
-						{% for acheteurs in demande.acheteur.image %}
-                        <img  src="{{ asset('assets/images/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="60" />
-                          {% endfor %}
-                            
-                            
+							<div class="image mr-3">  
+								{% for acheteurs in demande.acheteur.image %}
+                        		<img  src="{{ asset('assets/images/profil/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="100" style="border:2px solid wheat"/>
+                          		{% endfor %}
 							</div>
-                        
-							<div class="">
+							<div>
 								<div class="d-flex flex-row mb-1">
 									<span>{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}</span>
 								</div>
 								<div class="ml-5">
-                                {% if is_granted("ROLE_VENDEUR") %}
-                               
-                              
+                                	{% if is_granted("ROLE_VENDEUR") %}
 									<a class="btn btn-outline-dark btn-sm" href="{{ path('demande_detail', {slug: demande.slug}) }}">>>Voir plus</a>
-
-                                {% else %}
-                               
-                              
-									<button class="btn btn-dark btn-sm" disabled>>>Voir plus</button>
-                                {% endif %}
+                                	{% else %}
+									<span style="font-size:small;margin-left:5px;">{{ demande.acheteur.numeroTelephone }}</span>
+                                	{% endif %}
 								</div>
 							</div>
 						</div>
 						<hr class="line-color">
-						<p class="text-left">Zone de recherche :
-						<ol>	{% for adresse in demande.adresses %} <li> {{ adresse.ville }} {{ adresse.codePostal }} </li> {% endfor %} </ol></p>
-						<div class="third mt-4">
-							<button class="btn btn-dark btn-block">
-								Voir Profil</button>
+						<div class="text-left">Zone de recherche :
+						<ul>
+						{% for adresse in demande.adresses %} 
+							<li> {{ adresse.ville }} {{ adresse.codePostal }} </li> 
+						{% endfor %} 
+						</ul>
 						</div>
 					</div>
 				</div>
@@ -123,6 +120,8 @@
             
 		</div>
 		{# {{ dump(knp_pagination_render(pagination))}} #}
-		<div class="navigation d-flex justify-content-center my-5">{{ knp_pagination_render(pagination) }} </div>
+		<div class="navigation d-flex justify-content-center my-5">
+			{{ knp_pagination_render(pagination) }} 
+		</div>
 	</main>
 {% endblock %}

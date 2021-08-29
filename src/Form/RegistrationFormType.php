@@ -4,15 +4,18 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -40,10 +43,55 @@ class RegistrationFormType extends AbstractType
             )
         
             )
-            ->add('email')
-            ->add('prenom')
-            ->add('nom')
-            ->add('numero_telephone')
+            ->add('email', EmailType::class,
+                [
+                    'constraints' => [
+                        new NotBlank([
+                        'message' => 'Merci d\'entrer votre adresse email',
+                        ]),    
+                ],
+            ])
+            ->add('prenom', TextType::class,
+            [
+                'constraints' => [
+                    new NotBlank([
+                    'message' => 'Merci d\'entrer votre prénom',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre prénom doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+            ],
+        ])
+            ->add('nom',TextType::class,
+            [
+                'constraints' => [
+                    new NotBlank([
+                    'message' => 'Merci d\'entrer votre nom',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre nom doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+            ],
+        ])
+            ->add('numero_telephone',TelType::class,
+            [
+                'constraints' => [
+                    new NotBlank([
+                    'message' => 'Merci d\'entrer votre numéro de téléphone',
+                    ]),
+                    new Length([
+                        'min' => 10,
+                        'maxMessage' => 'Le numéro de téléphone tapé doit avoir {{ limit }} chiffres',
+                        'max' => 10,
+                    ]),
+            ],
+        ])
             
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -69,6 +117,12 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('image',FileType::class, [
+                'label' => false,
+                'mapped' => false,
+                'multiple' => true,
+                'required' => true  ,
             ])
         ;
     }

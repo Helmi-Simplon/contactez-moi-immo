@@ -82,8 +82,8 @@ class AcheteurdemandesController extends AbstractController
             ]);
         }
         return $this->render('acheteurBO/acheteurdemandes/maj_demande.html.twig', [
-            'controller_name' => 'AcheteurdemandesController',
             'form' => $form->createView(),
+            'demandes'=>$demandes,
            
         ]);
     }

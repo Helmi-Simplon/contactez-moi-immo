@@ -6,8 +6,9 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/city.jpg")}}');
+			background-image: url('{{asset("assets/images/profil/city.jpg")}}');
             background-size:cover;
+            background-attachment: fixed;
 		}
 		
         main{
@@ -26,6 +27,9 @@
             color:white;
             text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;
         }
+        .hidden{
+            display:none;
+        }
 
 	</style>
 {% endblock %}
@@ -33,12 +37,102 @@
 {% block body %}
 	<main class="add-offer">
 
-		<div class="container">
-        <div class="wraper">
-			{{ form(form) }}
+		<div class="container d-flex" style="padding-left:10px;width:fit-content;">
+        	<div class="card" style="padding-left:10px;padding-right:10px;background:transparent;">
+				{{ form_start(form) }}
+
+					<label>Titre</label>
+					{{ form_widget(form.titre)}}
+					<label>Type de biens</label>	
+					{{ form_widget(form.typebien)}}
+					<label>Superficie en m²</label>
+					&nbsp;<label id="result">0</label>
+					{{ form_widget(form.superficie,{'attr':{'value':0}})}}
+					<div id="app">
+					<label>Nombre de pièces</label>
+					&nbsp;<label id="result1">0</label>
+					{{ form_widget(form.nbre_pieces,{'attr':{'value':0}})}}
+					</div>
+					<div id="imm">
+					<label>Nombre d'appartements</label>
+					&nbsp;<label id="result2">0</label>
+					{{ form_widget(form.nbre_appartements,{'attr':{'value':0}})}}
+
+					<label>Nombre de studios</label>
+					&nbsp;<label id="result3">0</label>
+					{{ form_widget(form.nbre_studios,{'attr':{'value':0}})}}
+					</div>
+					<div id="terr">
+					<label>Places de parking</label>
+					&nbsp;<label id="result4">0</label>
+					{{ form_widget(form.places_parking,{'attr':{'value':0}})}}
+					<label>Cave</label>
+					&nbsp;<label id="result5">0</label>
+					{{ form_widget(form.cave,{'attr':{'value':0}})}}
+					</div>
+					<label>Prix en €</label>
+					&nbsp;<label id="result6">0</label>
+					{{ form_widget(form.prix,{'attr':{'value':0}})}}
+					<label>Description</label>
+					{{ form_widget(form.description)}}
+					<label>Ville</label>
+					{{ form_widget(form.adresse)}}
+                    <label> Ajout d'images</label>
+					{{ form_widget(form.image)}}
+					<div class="text-center mt-2">
+					
+					{{ form_widget(form.Valider)}}
+					</div>
+				{{ form_end(form) }}
+
 			
 		</div>
         </div>
 
 	</main>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {	
+            let typebiens = document.querySelectorAll(".form-check-input");
+			let app = document.querySelector("#app");
+			let imm = document.querySelector("#imm");
+			let terr = document.querySelector("#terr");
+	 		for(let typebien of typebiens){
+				typebien.addEventListener('click', function(){
+					if(document.getElementById("offres_typebien_3").checked){
+	 					app.className = "hidden";
+						imm.className = "";
+					}else if(document.getElementById("offres_typebien_5").checked || document.getElementById("offres_typebien_6").checked){
+						app.className = "hidden";
+						imm.className = "hidden";
+						terr.className= "hidden";
+					}else{
+						app.className = "";
+						terr.className= "";
+	 					imm.className = "hidden";
+	 				}	
+	 			})
+			}
+
+			displayRange("#result","#offres_superficie");
+			displayRange("#result1","#offres_nbre_pieces");
+			displayRange("#result2","#offres_nbre_appartements");
+			displayRange("#result3","#offres_nbre_studios");
+			displayRange("#result4","#offres_places_parking");
+			displayRange("#result5","#offres_cave");
+			displayRange("#result6","#offres_prix");			
+	 	}
+
+		function displayRange(id1,id2){
+			let results = document.querySelector(id1);
+			let ranges = document.querySelectorAll(id2);
+			for(let range of ranges){
+ 				range.addEventListener("input", function(){
+					results.innerHTML = range.value;
+			 	})
+			}
+		}
+    </script>
 {% endblock %}

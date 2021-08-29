@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,7 @@ class ContactReponseType extends AbstractType
             //->add('sujet')
             //->add('contenu')
             //->add('dateEnvoi')
-            ->add('reponse',TextareaType::class,[
+            ->add('reponse',CKEditorType::class,[
                 'label' => 'Réponse',
                 'attr' => ['class' => 'text-primary'],
                 'attr' => ['class' => 'tinymce'],

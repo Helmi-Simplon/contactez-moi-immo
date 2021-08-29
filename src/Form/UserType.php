@@ -4,10 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserType extends AbstractType
 {
@@ -43,7 +44,13 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('numero_telephone')
             //->add('actif')
+            ->add('image', FileType::class,[
+                'label' => false,
+                'mapped' => false,
+                'required' => false
+            ])
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,9 +1,9 @@
-<header {% if app.request.requestUri is same as "/register" %} style="height:350px;background-repeat: no-repeat; background-image: url('assets/images/enregistrement.jpg');background-size:100% 100%;" {% elseif app.request.requestUri is same as "/login" %} style="height:350px;background-repeat: no-repeat; background-image: url('assets/images/connexion.jpg');background-size:100% 100%;" {% endif %}>
+<header {% if app.request.requestUri is same as "/register" %} style="height:350px;background-repeat: no-repeat; background-image: url('assets/images/profil/enregistrement.jpg');background-size:100% 100%;" {% elseif app.request.requestUri is same as "/login" %} style="height:350px;background-repeat: no-repeat; background-image: url('assets/images/profil/connexion.jpg');background-size:100% 100%;" {% endif %}>
 	<div class="container position-relative text-center px-4 px-lg-5">
 		{% if app.user %}
 			<div class="container-fluid" style="color:#fff;padding-top:2%;text-shadow:1px 1px 2px black, 0 0 1em black, 0 0 0.2em white;">
 				{% for image in app.user.image %}
-					<img src="{{ asset('assets/images/' ~ image.urlImage ) }}" class="rounded-circle" width="60"/>
+					<img src="{{ asset('assets/images/profil/' ~ image.urlImage ) }}" class="rounded-circle" width="90" style="border:2px solid wheat"/>
 				{% endfor %}
 				Bonjour
 				{{ app.user.prenom }}

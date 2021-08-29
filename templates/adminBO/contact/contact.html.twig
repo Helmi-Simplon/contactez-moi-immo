@@ -35,9 +35,9 @@
                                             <td class="">{{ contact.expediteur}}</td>
                                             <td class="">{{ contact.destinataire}}</td>
                                             <td class="">{{ contact.sujet}}</td>
-                                            <td class="">{{ contact.contenu | u.truncate(15,'...') }}</td>
+                                            <td class="">{{ contact.contenu | u.truncate(15,'...') | raw}}</td>
                                             <td class="">{{ contact.dateEnvoi | format_datetime ('short','short', locale='fr')}} GMT</td>
-                                            <td class="">{{ contact.reponse | u.truncate(15,'...') }}</td>
+                                            <td class="">{{ contact.reponse | u.truncate(15,'...') | raw }}</td>
                                             <td><a class="btn btn-sm btn-outline-primary" href="{{ path('admin_contact_reponse',{id:contact.id})}}">Répondre</td>
                                             
                                         </tr>

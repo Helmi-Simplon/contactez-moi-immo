@@ -6,18 +6,30 @@
 	<style>
 
 		body {
-			background-image: url('{{asset("assets/images/demande1.jpg")}}');
-			background-size:cover;
+			background-image: url('{{asset("assets/images/profil/card.jpg")}}');
+			background-size: cover;
+			background-attachment: fixed;
 		}
 		.card {
-			background-image: url('{{asset("assets/images/textile.jpg")}}');
-			background-size:cover;
-			width: 70%;
-			height: fit-content;
+			background-image: linear-gradient(109.6deg, rgba(15,2,2,1) 11.2%, rgba(36,163,190,1) 91.1%);
+			max-width: 55%;
+			min-width: 30%;
+			height: auto;
 			color: white;
-			text-align:center;
-			padding-bottom:50px;
+			text-align: center;
+			padding-bottom: 50px;
+			padding-left: 10px;
+			padding-right: 10px;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 1%;
+			border: 5px solid #476875;
+			color: whitesmoke;
+			text-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em white;
 
+		}
+		.card img {
+			position: relative;
 		}
 
 		.heading {
@@ -30,7 +42,7 @@
 			margin-top: 1px;
 			color: white;
 			font-size: 12px;
-			text-align: left;
+			text-align: center;
 		}
 
 		.btn {
@@ -43,61 +55,83 @@
 			color: green;
 			height: 3px;
 		}
-		.info-name{
-			text-align:center;
-			width:60%;
-			font-size:90%;
-			font-weight:bolder;
-			color:gray;
-			margin-left:1%;
-			font-family:comic;
+
+		.info {
+			margin-left: auto;
+			margin-right: auto;
+			color: white;
+			text-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em white;
 		}
-		.info{
-			margin-left:20%;
-			color:white;
-			 text-shadow:1px 1px 2px black, 0 0 1em gray, 0 0 0.2em white;
+		#desc {
+			text-align: left;
+			color: whitesmoke;
 		}
 	</style>
 {% endblock %}
 {% block titre %}
 	<div class="info">et voici les détails...<br></div>
-	<div class="info">Let's read it! </div>
+	<div class="info">Let's read it!
+	</div>
 {% endblock %}
 {% block body %}
 	<main>
-
-		<div class="d-flex">
-			<div class="col-2">
-				{% for vendeur in offres.vendeur.image %}
-					<img src="{{ asset('assets/images/' ~ vendeur.urlImage ) }}" class="rounded-circle" width="60%"/>
-				{% endfor %}
-				<div class="info-name">{{ offres.vendeur.prenom }} {{ offres.vendeur.nom }}</div>
-			</div>
+		<div class="d-flex"></div>
 			<div class="card col-2 mt-5">
-			<span class="hour ml-1"> diffusé{{ offres.dateOffre | ago }}</span>
+				<span class="hour ml-1">
+					Diffusée
+					{{ offres.dateOffre | ago }}</span>
+				<hr>
+				<div>
+					{% for vendeur in offres.vendeur.image %}
+						<img src="{{ asset('assets/images/profil/' ~ vendeur.urlImage ) }}" class="rounded-circle" width="160"/>
+					{% endfor %}
+					<br>
+					{{ offres.vendeur.prenom }}
+					{{ offres.vendeur.nom }}
+				</div>
+				<hr>
 				Prix :
 				<div>
-					<legend>{{ offres.prix}}€</legend>
-					<div>
-						Type de Bien :
-						<div><legend>{{ offres.typeBien }}</legend><div>
-								Nombre de Pièce :
-								<div><legend>{{ offres.nbrePieces }}</legend><div>
-										Zone de recherche :
-										<div>
-											<legend>{{ offres.adresse.ville }}</legend>
-												
-										
-										</div>
-										
-										{% for image in offres.image %}
-										<div>	<img src="{{ asset('assets/images/offres/' ~ image.urlImage ) }}"  width="40%"/> </div>
-											{% endfor %}
-											<hr>
-											<legend>Description :</legend>
-											{{ offres.description}}
-											</div>
-											</div>
-											
-										</main>
-									{% endblock %}
+				<legend>{{ offres.prix}}€</legend>
+				</div>
+				Type de Bien :
+				<div>
+					<legend>{{ offres.typeBien }}</legend>
+				<div>
+					Nombre de Pièce :
+				</div>
+				<div>
+					<legend>{{ offres.nbrePieces }}</legend>
+				</div>
+				Zone de recherche :
+				<div>
+					<legend>{{ offres.adresse.ville }}</legend>
+				</div>
+				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="{{ asset('assets/images/offres/grid.jpg') }}" class="d-block w-100" alt=""/>
+						</div>
+						{% for image in offres.image %}
+							<div class="carousel-item">
+								<img src="{{ asset('assets/images/offres/' ~ image.urlImage ) }}" class="d-block w-100" alt=""/>
+							</div>
+						{% endfor %}
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+			<hr>
+			<legend>Description :</legend>
+			<div id="desc">{{ offres.description}}</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

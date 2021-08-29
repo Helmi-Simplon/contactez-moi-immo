@@ -30,6 +30,9 @@ class DemandesRepository extends ServiceEntityRepository
             ->leftjoin('d.adresses','a')
             ->leftjoin('d.acheteur','u')
             ->leftjoin('u.image','i')
+            ->andWhere('d.actif = :actif')
+            ->setParameter('actif', true)
+            ->orderBy('d.date_demande', 'DESC')
             ->getQuery()
             ->getResult()
         ;

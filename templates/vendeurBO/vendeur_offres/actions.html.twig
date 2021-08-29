@@ -4,49 +4,52 @@
 {% block titre %}MON ESPACE VENDEUR{% endblock %}
 
 {% block body %}
-<main>
-<div class = "container">
-<div class="h4">METTRE A JOUR MES OFFRES</div>
-<hr>
- <table class="table table-dark table-hover text-warning">
-  <thead>
-    <tr>
-      <th scope="col"><h5 class="text-success">Référence</h5></th>
-      <th scope="col"><h5 class="text-success">Titre</h5></th>
-      <th></th>
-      <th scope="col"><h5 class="text-success text-center">Action</h5></th>
-      <th></th>
-
-    </tr>
-  </thead>
-  <tbody>
-{# {{ dump(offres)}} #}
-{% for offre in app.user.offre %}
- 
-    <tr>
-      <td><h6 class="text-warning">#Ref000{{ offre.id }}</h6></td>
+    <main>
+        <div class = "container">
+            <div class="h4">
+            METTRE A JOUR MES OFFRES
+            </div>
+            <hr>
+            <table class="table table-warning table-hover text-warning">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <h5 class="text-dark">Référence</h5>
+                        </th>
+                        <th scope="col">
+                            <h5 class="text-dark">Titre</h5>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for offre in app.user.offre %}
+                    <tr>
+                        <td>
+                            <h6 class="text-dark">#Ref000{{ offre.id }}</h6>
+                        </td>
       
-      <td><h6 class="text-warning">{{ offre.titre }}</h6></td>
-      <td class="text-left"><a class="btn btn-sm btn-dark"href="{{ path('vendeur_offres_maj',{id:offre.id})}}"><h6 class="text-light">Editer</h6></a>
-      </td>
-      {% if offre.actif == 1 %}
-      <td>
-      <a class="btn btn-sm btn-dark"href="{{ path('vendeur_offres_activation',{id:offre.id})}}"><h6 class="text-info">Archiver</h6></a>
-      </td>
-      {% else %}
-      <td>
-      <a class="btn btn-sm btn-dark"href="{{ path('vendeur_offres_activation',{id:offre.id})}}"><h6 class="text-info">Publier</h6></a>
-      </td>
-      {% endif %}
-      <td><a class="btn btn-dark btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ offre.id }}" data-reference="{{ offre.id }}"><h6 class="text-danger">Supprimer</h6></a></td>
-    </tr>
+                        <td>
+                            <h6 class="text-dark">{{ offre.titre }}</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" class="text-left text-center">
+                            <a class="btn btn-sm btn-outline-success"href="{{ path('vendeur_offres_maj',{id:offre.id})}}">Editer</a>
+                            {% if offre.actif == 1 %}
+                            <a class="btn btn-sm btn-outline-dark"href="{{ path('vendeur_offres_activation',{id:offre.id})}}">Archiver</a>
+                            {% else %}
+                            <a class="btn btn-sm btn-dark"href="{{ path('vendeur_offres_activation',{id:offre.id})}}">Publier</a>
+                            {% endif %}
+                            <a class="btn btn-outline-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ offre.id }}" data-reference="{{ offre.id }}">Supprimer</a>
+                        </td>
+                    </tr>
 
- {% endfor %}
+                    {% endfor %}
 
-</tbody>
-</table>
-</div>
-</main>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
 <!-- Modal -->
     <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

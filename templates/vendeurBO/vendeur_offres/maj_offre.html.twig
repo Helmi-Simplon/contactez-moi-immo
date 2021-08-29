@@ -23,47 +23,54 @@
                 <th>Titre:</th>
                 <td>{{ form_widget(form.titre) }}</td>
             </tr>
-            <tr>
-                <th>Superficie:</th>
-                <td>{{ form_widget(form.superficie) }}</td>
+             <tr>
+                <th>Type du bien:</th>
+                <td>{{ form_widget(form.typebien) }}</td>
             </tr>
             <tr>
-                <th>Nombre de Pièces:</th>
+                <th>Superficie: </th>
+                <td>{{ form_widget(form.superficie) }} </td>
+                <td>&nbsp;<span id="result">{{ offres.superficie }}</span>m²&nbsp;</td>
+            </tr>
+            <tr class="app">
+                <th>Nombre de Pièces: </th>
                 <td>{{ form_widget(form.nbre_pieces) }}</td>
+                <td>&nbsp;<span id="result1">{{ offres.nbrePieces }}&nbsp;</span></td>
             </tr>
-			<tr>
+			<tr class="imm">
                 <th>Nombre d'Appartements:</th>
                 <td>{{ form_widget(form.nbre_appartements) }}</td>
+                <td> &nbsp;<span id="result2">{{ offres.nbreAppartements }}&nbsp;</span></td>
             </tr>
-			<tr>
+			<tr class="imm1">
                 <th>Nombre de Studios:</th>
                 <td>{{ form_widget(form.nbre_studios) }}</td>
+                <td>&nbsp;<span id="result3">{{ offres.nbreStudios }}&nbsp;</span></td>
             </tr>
-            <tr>
-                <th>Places de Parking:</th>
+            <tr class="terr">
+                <th>Places de Parking: </th>
                 <td>{{ form_widget(form.places_parking) }}</td>
+                <td>&nbsp;<span id="result4">{{ offres.placesParking }}&nbsp;</span></td>
             </tr>
-            <tr>
-                <th>Cave:</th>
+            <tr class="terr1">
+                <th>Cave: </th>
                 <td>{{ form_widget(form.cave) }}</td>
+                <td>&nbsp;<span id="result5">{{ offres.cave }}</span>&nbsp;</td>
             </tr>
             <tr>
-                <th>Prix:</th>
+                <th>Prix: </th>
                 <td>{{ form_widget(form.prix) }}</td>
+                <td>&nbsp;<span id="result6">{{ offres.prix }}</span>€&nbsp;</td>
             </tr>
             <tr>
                 <th>Description:</th>
                 <td>{{ form_widget(form.description) }}</td>
             </tr>
             <tr>
-                <th>Type du bien:</th>
-                <td>{{ form_widget(form.typebien) }}</td>
-            </tr>
-            <tr>
                 <th>Ville:</th>
                 <td>{{ form_widget(form.adresse) }}</td>
             </tr>
-			<tr class="hidden">
+			<tr>
                 <th>Vos images en pièces-jointes:</th>
                 <td>{{ form_widget(form.image) }}</td>
             </tr>
@@ -80,3 +87,53 @@
 	</main>
 {% endblock %}
 
+{% block javascripts %}
+    <script>
+        window.onload = () => {	
+            let typebiens = document.querySelectorAll(".form-check-input");
+			let app = document.querySelector(".app");
+			let imm = document.querySelector(".imm");
+			let terr = document.querySelector(".terr");
+            let imm1 = document.querySelector(".imm1");
+			let terr1 = document.querySelector(".terr1");
+	 		for(let typebien of typebiens){
+				typebien.addEventListener('click', function(){
+					if(document.getElementById("offres_typebien_3").checked){
+	 					app.className = "hidden";
+						imm.className = "";
+                        imm1.className = "";
+					}else if(document.getElementById("offres_typebien_5").checked || document.getElementById("offres_typebien_6").checked){
+						app.className = "hidden";
+						imm.className = "hidden";
+                        imm1.className = "hidden";
+						terr.className= "hidden";
+                        terr1.className= "hidden";
+					}else{
+						app.className = "";
+						terr.className= "";
+	 					imm.className = "hidden";
+                        imm1.className = "hidden";
+	 				}	
+	 			})
+			}
+
+			displayRange("#result","#offres_superficie");
+			displayRange("#result1","#offres_nbre_pieces");
+			displayRange("#result2","#offres_nbre_appartements");
+			displayRange("#result3","#offres_nbre_studios");
+			displayRange("#result4","#offres_places_parking");
+			displayRange("#result5","#offres_cave");
+			displayRange("#result6","#offres_prix");			
+	 	}
+
+		function displayRange(id1,id2){
+			let results = document.querySelector(id1);
+			let ranges = document.querySelectorAll(id2);
+			for(let range of ranges){
+ 				range.addEventListener("input", function(){
+					results.innerHTML = range.value;
+			 	})
+			}
+		}
+    </script>
+{% endblock %}

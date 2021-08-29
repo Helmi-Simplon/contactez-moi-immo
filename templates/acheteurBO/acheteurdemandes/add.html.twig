@@ -1,69 +1,151 @@
 {% extends 'acheteurBO/base.html.twig' %}
 
-{% block title %} CONTACTEZ-MOI IMMO DEMANDES {% endblock %}
-{% block titre %}MON ESPACE ACHETEUR{% endblock %}
+{% block title %}
+	CONTACTEZ-MOI IMMO DEMANDES
+{% endblock %}
+{% block stylesheets %}
+	<style>
+		.hidden {
+			display: none;
+		}
+	</style>
+{% endblock %}
+{% block titre %}MON ESPACE ACHETEUR
+{% endblock %}
 {% block body %}
 	<main>
-    <div class="container">
-    <legend>POSTER UNE DEMANDE</legend>
-					<hr>
 		<div class="container">
-    <div class="row">
-        {{ form_start(form) }}
-        <table>
-            <tbody>
-            <tr>
-                <th>Titre:</th>
-                <td>{{ form_widget(form.titre) }}</td>
-            </tr>
-            <tr>
-                <th>Superficie:</th>
-                <td>{{ form_widget(form.superficie) }}</td>
-            </tr>
-            <tr>
-                <th>Nombre de Pièces:</th>
-                <td>{{ form_widget(form.nbre_pieces) }}</td>
-            </tr>
-			<tr>
-                <th>Nombre d'Appartements:</th>
-                <td>{{ form_widget(form.nbre_appartements) }}</td>
-            </tr>
-			<tr>
-                <th>Nombre de Studios:</th>
-                <td>{{ form_widget(form.nbre_studios) }}</td>
-            </tr>
-            <tr>
-                <th>Place de Parking:</th>
-                <td>{{ form_widget(form.nbre_parking) }}</td>
-            </tr>
-            <tr>
-                <th>Cave:</th>
-                <td>{{ form_widget(form.cave) }}</td>
-            </tr>
-            <tr>
-                <th>Budget:</th>
-                <td>{{ form_widget(form.budget) }}</td>
-            </tr>
-            <tr>
-                <th>Description:</th>
-                <td>{{ form_widget(form.description) }}</td>
-            </tr>
-            <tr>
-                <th>Type du bien:</th>
-                <td>{{ form_widget(form.typebien) }}</td>
-            </tr>
-            <tr>
-                <th>Zone de votre recherche:</th>
-                <td>{{ form_widget(form.adresses) }}</td>
-            </tr>
-			
-            </tr>
-            </tbody>
-        </table>
-		
-        {{ form_end(form) }}
-    </div>
-    </div>
+			<h4 class="text-secondary">POSTER UNE DEMANDE</h4>
+			<hr>
+			<div class="container">
+				<div class="row">
+					{{ form_start(form) }}
+					<table>
+						<tbody>
+							<tr>
+								<th>Titre:</th>
+								<td>{{ form_widget(form.titre) }}</td>
+							</tr>
+							<tr>
+								<th>Type du bien:</th>
+								<td>{{ form_widget(form.typebien) }}</td>
+							</tr>
+							<tr>
+								<th>Superficie:
+								</th>
+								<td>{{ form_widget(form.superficie,{'attr':{'value':0}}) }}
+								</td>
+								<td>&nbsp;<span id="result">0</span>m²&nbsp;</td>
+							</tr>
+							<tr class="app">
+								<th>Nombre de Pièces:
+								</th>
+								<td>{{ form_widget(form.nbre_pieces,{'attr':{'value':0}}) }}</td>
+								<td>&nbsp;<span id="result1">0&nbsp;</span>
+								</td>
+							</tr>
+							<tr class="imm">
+								<th>Nombre d'Appartements:</th>
+								<td>{{ form_widget(form.nbre_appartements,{'attr':{'value':0}}) }}</td>
+								<td>
+									&nbsp;<span id="result2">0&nbsp;</span>
+								</td>
+							</tr>
+							<tr class="imm1">
+								<th>Nombre de Studios:</th>
+								<td>{{ form_widget(form.nbre_studios,{'attr':{'value':0}}) }}</td>
+								<td>&nbsp;<span id="result3">0&nbsp;</span>
+								</td>
+							</tr>
+							<tr class="terr">
+								<th>Places de Parking:
+								</th>
+								<td>{{ form_widget(form.nbre_parking,{'attr':{'value':0}}) }}</td>
+								<td>&nbsp;<span id="result4">0&nbsp;</span>
+								</td>
+							</tr>
+							<tr class="terr1">
+								<th>Cave:
+								</th>
+								<td>{{ form_widget(form.cave,{'attr':{'value':0}}) }}</td>
+								<td>&nbsp;<span id="result5">0</span>&nbsp;</td>
+							</tr>
+							<tr>
+								<th>Budget:
+								</th>
+								<td>{{ form_widget(form.budget,{'attr':{'value':0}}) }}</td>
+								<td>&nbsp;<span id="result6">0</span>€&nbsp;</td>
+							</tr>
+							<tr>
+								<th>Description:</th>
+								<td>{{ form_widget(form.description) }}</td>
+							</tr>
+							<tr>
+								<th>Zone de recherche:</th>
+								<td>{{ form_widget(form.adresses) }}</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td class="text-center">{{ form_widget(form.Valider,{Label:"Mettre à jour"}) }}</td>
+							</tr>
+						</tbody>
+					</table>
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
 	</main>
 {% endblock %}
 
+{% block javascripts %}
+	<script>
+		window.onload = () => {
+let typebiens = document.querySelectorAll(".form-check-input");
+let app = document.querySelector(".app");
+let imm = document.querySelector(".imm");
+let terr = document.querySelector(".terr");
+let imm1 = document.querySelector(".imm1");
+let terr1 = document.querySelector(".terr1");
+for (let typebien of typebiens) {
+typebien.addEventListener('click', function () {
+if (document.getElementById("demandes_typebien_3").checked) {
+app.className = "hidden";
+imm.className = "";
+imm1.className = "";
+} else if (document.getElementById("demandes_typebien_5").checked || document.getElementById("demandes_typebien_6").checked) {
+app.className = "hidden";
+imm.className = "hidden";
+imm1.className = "hidden";
+terr.className = "hidden";
+terr1.className = "hidden";
+} else {
+app.className = "";
+terr.className = "";
+terr1.className = "";
+imm.className = "hidden";
+imm1.className = "hidden";
+}
+})
+}
+
+displayRange("#result", "#demandes_superficie");
+displayRange("#result1", "#demandes_nbre_pieces");
+displayRange("#result2", "#demandes_nbre_appartements");
+displayRange("#result3", "#demandes_nbre_studios");
+displayRange("#result4", "#demandes_nbre_parking");
+displayRange("#result5", "#demandes_cave");
+displayRange("#result6", "#demandes_budget");
+}
+
+function displayRange(id1, id2) {
+let results = document.querySelector(id1);
+let ranges = document.querySelectorAll(id2);
+for (let range of ranges) {
+range.addEventListener("input", function () {
+results.innerHTML = range.value;
+})
+}
+}
+	</script>
+{% endblock %}

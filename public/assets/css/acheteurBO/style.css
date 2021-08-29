@@ -9,7 +9,7 @@
 		.wrapper {
 			display: grid;
 			grid-template-columns: repeat(10, 1fr);
-			grid-gap: 10px;
+			grid-gap: 0px;
 			grid-auto-rows: minmax(100px, auto);
 
 		}
@@ -25,6 +25,7 @@
 			grid-row: 1 / 8;
 			border: 1px solid gray;
 			box-shadow: -1em lightgray;
+			font-size:smaller;
 
 		}
 		.list-item {

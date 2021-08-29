@@ -23,7 +23,7 @@ class DemandesController extends AbstractController
         $pagination = $paginator->paginate(
             $demandes,
             $request->query->getInt('page', 1),
-            9
+            8
         );
    
 
