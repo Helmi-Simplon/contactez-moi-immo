@@ -82,9 +82,7 @@
 					{{ offres.dateOffre | ago }}</span>
 				<hr>
 				<div>
-					{% for vendeur in offres.vendeur.image %}
-						<img src="{{ asset('assets/images/profil/' ~ vendeur.urlImage ) }}" class="rounded-circle" width="160"/>
-					{% endfor %}
+						<img src="{{ asset('assets/images/profil/' ~ offres.vendeur.images.urlImage ) }}" class="rounded-circle" width="160"/>
 					<br>
 					{{ offres.vendeur.prenom }}
 					{{ offres.vendeur.nom }}

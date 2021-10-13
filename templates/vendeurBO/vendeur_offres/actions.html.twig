@@ -40,6 +40,7 @@
                             {% else %}
                             <a class="btn btn-sm btn-dark"href="{{ path('vendeur_offres_activation',{id:offre.id})}}">Publier</a>
                             {% endif %}
+                            <a class="btn btn-sm btn-outline-success"href="{{ path('vendeur_offres_image',{offre:offre.id})}}">Gérer les images</a>
                             <a class="btn btn-outline-danger btn-sm modal-trigger" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="{{ offre.id }}" data-reference="{{ offre.id }}">Supprimer</a>
                         </td>
                     </tr>

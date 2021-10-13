@@ -64,21 +64,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $offre;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="utilisateur")
-     */
-    private $image;
-
+    
     /**
      * @ORM\Column(type="boolean")
      */
     private $actif;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Images::class, mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $images;
+
     public function __construct()
     {
         $this->demande = new ArrayCollection();
         $this->offre = new ArrayCollection();
-        $this->image = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,36 +266,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Images[]
-     */
-    public function getImage(): Collection
-    {
-        return $this->image;
-    }
-
-    public function addImage(Images $image): self
-    {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
-            $image->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Images $image): self
-    {
-        if ($this->image->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getUtilisateur() === $this) {
-                $image->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getActif(): ?bool
     {
         return $this->actif;
@@ -304,6 +274,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getImages(): ?Images
+    {
+        return $this->images;
+    }
+
+    public function setImages(?Images $images): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($images === null && $this->images !== null) {
+            $this->images->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($images !== null && $images->getUtilisateur() !== $this) {
+            $images->setUtilisateur($this);
+        }
+
+        $this->images = $images;
 
         return $this;
     }

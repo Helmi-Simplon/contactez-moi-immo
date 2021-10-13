@@ -48,11 +48,10 @@ class RegistrationController extends AbstractController
                 // On crée l'image dans la base de données
                 $image = new Images();
                 $image->setUrlImage($fichier);
-                $user->addImage($image);
+                $user->setImages($image);
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
-            $entityManager->persist($image);
             $entityManager->flush();
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Félicitations! Votre compte a été créé avec succès!');

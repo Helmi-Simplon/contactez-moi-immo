@@ -31,14 +31,14 @@ class Images
     private $date_ajout;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="image")
-     */
-    private $utilisateur;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Offres::class, inversedBy="image")
      */
     private $offre;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="images", cascade={"persist", "remove"})
+     */
+    private $utilisateur;
 
     public function getId(): ?int
     {
@@ -69,17 +69,6 @@ class Images
         return $this;
     }
 
-    public function getUtilisateur(): ?User
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?User $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
 
     public function getOffre(): ?Offres
     {
@@ -89,6 +78,18 @@ class Images
     public function setOffre(?Offres $offre): self
     {
         $this->offre = $offre;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

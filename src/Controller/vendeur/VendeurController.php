@@ -25,7 +25,7 @@ class VendeurController extends AbstractController
      /**
      * @Route("/vendeur/profil/update/{id}", name="vendeur_profil_update", requirements={"id"="\d+"})
      */
-    public function updateVendeur(User $user, Images $images, Request $request): Response
+    public function updateVendeur(User $user,Request $request): Response
     {
         $form = $this->createForm(MajProfilType::class, $user);
         $form->handleRequest($request);
@@ -48,8 +48,17 @@ class VendeurController extends AbstractController
                 );
         
                 // On crée l'image dans la base de données
-                $images->setUrlImage($fichier);
-                $user->addImage($images);
+                $image=$user->getImages();
+                if($image){
+                    $image->setUrlImage($fichier);
+                    $user->setImages($image); 
+                }
+                else{
+                    $image= new Images;
+                    $image->setUrlImage($fichier);
+                    $user->setImages($image);
+                }
+                
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

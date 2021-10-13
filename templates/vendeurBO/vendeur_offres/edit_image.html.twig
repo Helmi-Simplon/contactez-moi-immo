@@ -1,0 +1,28 @@
+{% extends 'vendeurBO/base.html.twig' %}
+
+{% block title %} CONTACTEZ-MOI IMMO OFFRES {% endblock %}
+{% block stylesheets %}
+<style>
+.hidden{
+	display:none;
+}
+</style>
+{% endblock %}
+{% block titre %}MON ESPACE VENDEUR{% endblock %}
+{% block body %}
+	<main>
+        <div class="container">
+            <div class="h4">
+                Mettre à jour mes images
+            </div>
+            <hr>
+            <div class="container">
+                <div class="card">
+					<img src="{{ asset('assets/images/offres/' ~ images.urlImage ) }}" class="d-block w-70" alt=""/></a>                
+                </div>
+                {{ form(form) }}
+               
+            </div>
+        </div>
+	</main>
+{% endblock %}

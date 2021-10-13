@@ -26,10 +26,9 @@ class DemandesRepository extends ServiceEntityRepository
     public function findAllWithAdresses()
     {
         return $this->createQueryBuilder('d')
-            ->addselect('a','u','i')
+            ->addselect('a','u')
             ->leftjoin('d.adresses','a')
             ->leftjoin('d.acheteur','u')
-            ->leftjoin('u.image','i')
             ->andWhere('d.actif = :actif')
             ->setParameter('actif', true)
             ->orderBy('d.date_demande', 'DESC')

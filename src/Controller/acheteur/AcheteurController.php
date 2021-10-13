@@ -46,8 +46,16 @@ class AcheteurController extends AbstractController
                 );
         
                 // On crée l'image dans la base de données
-                $images->setUrlImage($fichier);
-                $user->addImage($images);
+                $image=$user->getImages();
+                if($image){
+                    $image->setUrlImage($fichier);
+                    $user->setImages($image); 
+                }
+                else{
+                    $image= new Images;
+                    $image->setUrlImage($fichier);
+                    $user->setImages($image);
+                }
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

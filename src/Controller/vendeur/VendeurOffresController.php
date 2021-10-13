@@ -4,7 +4,9 @@ namespace App\Controller\vendeur;
 
 use App\Entity\Images;
 use App\Entity\Offres;
+use App\Form\ImagesType;
 use App\Form\OffresType;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -148,8 +150,12 @@ class VendeurOffresController extends AbstractController
      /**
      * @Route("/vendeur/offres/suppression/{id}", name="vendeur_offres_suppression", requirements={"id"="\d+"})
      */
-    public function supprimerDemande(Offres $offres,Request $request): Response
-    {
+    public function supprimerOffre(Offres $offres,Request $request): Response
+    {   
+        foreach($offres->getImage() as $image){
+            $offres->removeImage($image);
+        }
+        
         //dd($offres);
         $em = $this->getDoctrine()->getManager();
         $em->remove($offres);
@@ -160,5 +166,56 @@ class VendeurOffresController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/vendeur/offres/image/{id}", name="vendeur_offres_edit_image", requirements={"id"="\d+"})
+     */
+    public function imageOffre(Images $images, Request $request): Response
+    {
+        //dd($offres);
+        $form = $this->createForm(ImagesType::class, $images);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // On récupère les images transmises
+            $imgs = $form->get('url_image')->getData();
+    
+            // On boucle sur les images
+            foreach($imgs as $image){
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+        
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+                );
+        
+                // On crée l'image dans la base de données
+                $images->setUrlImage($fichier);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($images);
+            $em->flush();
+        
+            $this->addFlash('success', 'Votre image a été mise à jour avec succès !');
+        }
+
+        
+        return $this->render('vendeurBO/vendeur_offres/edit_image.html.twig',[
+            'form' =>$form->createView(),
+            'images' =>$images,
+        ]);
+       
+    }
+
+    /**
+     * @Route("/vendeur/offres/images/{offre}", name="vendeur_offres_image", requirements={"offre"="\d+"})
+     */
+    public function editImageOffre(Images $images, Request $request): Response
+    {
+        return $this->render('vendeurBO/vendeur_offres/maj_images.html.twig',[
+            'images' =>$images,
+        ]);
+    }
 
 }

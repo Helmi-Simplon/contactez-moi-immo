@@ -71,9 +71,7 @@
 				<span class="hour"> diffusé{{ demande.dateDemande | ago }}</span>
 				<hr>
 				<div>
-				{% for acheteurs in demande.acheteur.image %}
-					<img src="{{ asset('assets/images/profil/' ~ acheteurs.urlImage ) }}" class="rounded-circle" width="200" style="border:2px solid wheat"/>
-				{% endfor %}
+					<img src="{{ asset('assets/images/profil/' ~ demande.acheteur.images.urlImage ) }}" class="rounded-circle" width="200" style="border:2px solid wheat"/>
 				<br>
 				{{ demande.acheteur.prenom }} {{ demande.acheteur.nom }}
 				</div>
