@@ -5,5 +5,5 @@ twig:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 fos_ck_editor:
     #par défault le path démarre au dossier /public
-    base_path: "bundles/ckeditor"
-    js_path:   "bundles/ckeditor/ckeditor.js"
+    base_path: "assets/bundles/ckeditor"
+    js_path:   "assets/bundles/ckeditor/ckeditor.js"
